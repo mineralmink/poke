@@ -31,23 +31,36 @@ class PostsIndex extends Component {
                 Monster
             </Link>
             <button className="btn btn-primary" >Pokestop</button><br/>
-            <output> Output...</output><br/>
+            <output className="output"> Output...</output><br/>
             Speed <input type="number" />
-          <Link to="posts/new" className ="btn btn-primary">
-            Add d
+          {/*<Link to="posts/new" className ="btn btn-primary">*/}
+            {/*Add d*/}
+          {/*</Link>*/}
+        {/*<h3>Posts</h3>*/}
+        {/*<ul className="list-group">*/}
+          {/*{this.renderPosts()}*/}
+        {/*</ul>*/}
+            {/*<div className="arrow-up"></div>*/}
+            {/*<div className="arrow-down"></div>*/}
+            {/*<div className="arrow-left"></div>*/}
+            {/*<div className="arrow-right"></div>*/}
+          <div className="all-arrow">
+              <a className="up-arrow"> </a>
+              <a className="right-arrow"> </a>
+              <a className="left-arrow"> </a>
+              <a className="down-arrow"> </a>
+          </div>
+          <Link to="login" className ="btn btn-primary">
+              Logout
           </Link>
         </div>
-        <h3>Posts</h3>
-        <ul className="list-group">
-          {this.renderPosts()}
-        </ul>
       </div>
     );
   }
 }
 
 function mapStateToProps(state){
-  return { posts: state.posts.all };
+  return { posts: state.posts.all};
 }
 
 export default connect(mapStateToProps,{ fetchPosts }) (PostsIndex);

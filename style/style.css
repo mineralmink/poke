@@ -2,10 +2,18 @@ form a {
   margin-left: 5px;
   font-size: large;
 }
-
-
 input[type=number], select {
   width: 100%;
+  height: auto;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=text], select {
+  width: 80%;
   height: auto;
   padding: 12px 20px;
   margin: 8px 0;
@@ -30,7 +38,7 @@ input[type=submit]:hover {
   background-color: #45a049;
 }
 
-div {
+.text-xs-right{
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;
@@ -38,4 +46,60 @@ div {
 }
 Link[className=btn-primary]{
   font-size: inherit;
+}
+.output{
+  color: #868686;
+}
+.all-arrow {
+  border-color: transparent transparent;
+  border-style: solid;
+  align-content: center;
+  border-width: 20px 20px 20px 20px;
+  height: 300px;
+  width: 300px;
+  position: relative;
+  margin: auto;
+}
+
+.left-arrow {
+  border-color: transparent black;
+  border-style: solid;
+  border-width: 20px 20px 20px 0px;
+  height: 0px;
+  width: 0px;
+  position: absolute;
+  margin-left: 12%;
+  margin-top: 31%;
+}
+
+.right-arrow {
+  border-color: transparent black;
+  border-style: solid;
+  border-width: 20px 0px 20px 20px;
+  height: 0px;
+  width: 0px;
+  position: absolute;
+  margin-left: 88%;
+  margin-top: 31%;
+}
+
+.down-arrow {
+  border-color: black transparent;
+  border-style: solid;
+  border-width: 20px 20px 0px 20px;
+  height: 0px;
+  width: 0px;
+  position: absolute;
+  margin-left: 45%;
+  margin-top: 70%;
+}
+
+.up-arrow {
+  border-color: black transparent;
+  border-style: solid;
+  border-width: 0px 20px 20px 20px;
+  height: 0px;
+  width: 0px;
+  position: absolute;
+  margin-left: 45%;
 }

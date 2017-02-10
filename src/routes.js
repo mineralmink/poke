@@ -4,10 +4,12 @@ import PostsShow from './components/posts_show';
 import App from './components/app';
 import PostsIndex from './components/posts_index';
 import PostsNew from './components/posts_new';
-import Pokeball from './components/pokeball';
+import Pokeball from './components/Pokeball';
+import Login from './components/Login';
 export default(
   <Route path="/" component={App}>
     <IndexRoute component={PostsIndex} />
+      <Route path="login" components={Login}/>
       <Route path="posts/pokeball" component={Pokeball} />
       <Route path="posts/new" component={PostsNew} />
     <Route path="posts/:id" component={PostsShow} />
