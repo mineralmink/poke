@@ -7,7 +7,8 @@ import GoogleMap  from '../component/GoogleMap';
 class PostsIndex extends Component {
     componentWillMount(){
         this.props.fetchPosts();
-        console.log('hello')
+
+        console.log('hello',this.props.fetchPosts())
         //will call in first time?
     }
     renderPosts(){
@@ -35,8 +36,6 @@ class PostsIndex extends Component {
     }
 
     render(){
-        const lat = 15.870032;
-        const lon = 100.992541;
         return (
             <div>
                 <div className="text-xs-right" >
@@ -46,19 +45,19 @@ class PostsIndex extends Component {
                     <div>
                         <GoogleMap />
                     </div>
-                    <Link to="posts/pokeball" className ="btn btn-primary">
+                    <Link to="pokeball" className ="btn btn-primary">
                         Monster
                     </Link>
                     <button className="btn btn-primary" >Pokestop</button><br/>
                     <output className="output"> Output...</output><br/>
                     Speed <input type="number" />
-                    {/*<Link to="posts/new" className ="btn btn-primary">*/}
-                    {/*Add d*/}
-                    {/*</Link>*/}
-                    {/*<h3>Posts</h3>*/}
-                    {/*<ul className="list-group">*/}
-                    {/*{this.renderPosts()}*/}
-                    {/*</ul>*/}
+                    <Link to="posts/new" className ="btn btn-primary">
+                    Add d
+                    </Link>
+                    <h3>Posts</h3>
+                    <ul className="list-group">
+                    {this.renderPosts()}
+                    </ul>
                     {/*<div className="arrow-up"></div>*/}
                     {/*<div className="arrow-down"></div>*/}
                     {/*<div className="arrow-left"></div>*/}
@@ -73,7 +72,6 @@ class PostsIndex extends Component {
                         Logout
                     </Link>
                     <div height={'100%'}>
-                        ss
                         {/*{this.renderWeather(lat,lon)}*/}
 
                     </div>

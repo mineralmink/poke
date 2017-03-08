@@ -1,6 +1,7 @@
 /* global google */
 import React,{Component} from 'react'
-
+import { connect } from 'react-redux';
+import { fetchStopStation } from '../actions/index';
 import {
     withGoogleMap,
     GoogleMap,
@@ -25,7 +26,7 @@ const AccessingArgumentsExampleGoogleMap = withGoogleMap(props => (
  *
  * Add <script src="https://maps.googleapis.com/maps/api/js"></script> to your HTML to provide google.maps reference
  */
-export default class AccessingArgumentsExample extends Component {
+class AccessingArgumentsExample extends Component {
 
     state = {
         markers: [],
@@ -35,7 +36,11 @@ export default class AccessingArgumentsExample extends Component {
     handleMapClick = this.handleMapClick.bind(this);
     
     handleMapClick(event) {
-        console.log(this.state.center)
+       console.log(this.state.center.lat())
+        console.log(this.state.center.lng())
+        let lat = this.state.center.lat();
+        let lng = this.state.center.lng();
+        this.props.fetchStopStation(lat,lng);
         this.setState({
             center: event.latLng,
             markers: [
@@ -62,3 +67,5 @@ export default class AccessingArgumentsExample extends Component {
         );
     }
 }
+
+export default connect(null,{ fetchStopStation }) (AccessingArgumentsExample);

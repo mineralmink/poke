@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-import PostsShow from './components/posts_show';
+import PostsShow from './container/posts_show';
 import App from './components/app';
-import PostsIndex from './components/posts_index';
-import PostsNew from './components/posts_new';
+import PostsIndex from './container/posts_index';
+import PostsNew from './container/posts_new';
 import Pokeball from './components/Pokeball';
 import Login from './components/Login';
-import Ma from './component/GoogleMap';
+import LogOn from './components/LogOn';
 
 export default(
   <Route path="/" component={App}>
