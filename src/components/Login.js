@@ -12,7 +12,7 @@ class Login extends Component {
         this.props.fetchStatus();
         console.log('status',this.props.fetchStatus())
     }
-    handleLogin(username,hashed_password){
+    handleLogin(){
         let usr = document.getElementById('username').value;
         let psd = document.getElementById('password').value;
         this.props.login(usr,psd);

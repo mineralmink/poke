@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../actions/index';
+import { fetchMonster } from '../actions/index';
 import { Link } from 'react-router';
 class Pokeball extends Component {
 
+    componentDidMount(){
+
+    }
+
     render(){
         console.log('wtf')
+        console.log(this.props)
         return (
                 <div className="text-xs-right">
                     <h3>Monster</h3>
@@ -21,7 +26,4 @@ function mapStateToProps(state){
     return { posts: state.posts.all };
 }
 
-export default Pokeball;
-/**
- * Created by Mineralmink on 4/2/2560.
- */
+export default connect(mapStateToProps,{ fetchMonster }) (Pokeball);

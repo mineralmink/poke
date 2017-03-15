@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../actions/index';
+import { fetchPosts,fetchMonster } from '../actions/index';
 import { Link } from 'react-router';
 import GoogleMap  from '../component/GoogleMap';
 
 class PostsIndex extends Component {
+
+    state = {
+        latitude: null,
+        longitude: null
+    };
     componentWillMount(){
         this.props.fetchPosts();
-
         console.log('hello',this.props.fetchPosts())
         //will call in first time?
     }
@@ -23,6 +27,7 @@ class PostsIndex extends Component {
             )
         });
     }
+    
     renderWeather(lat,lon){
         console.log(lat,lon)
         return(
@@ -35,17 +40,32 @@ class PostsIndex extends Component {
         );
     }
 
+    handleGeolocation = () => {
+        const lat = +document.getElementById('latitude').value;
+        const lon = +document.getElementById('longitude').value;
+        this.setState({ latitude: lat,
+                        longitude: lon });
+    }
+
+    handleMonster= () =>{
+        console.log('monster',this.state)
+        this.props.fetchMonster(this.state.latitude,this.state.longitude)
+    }
+
     render(){
         return (
             <div>
                 <div className="text-xs-right" >
                     <h1>Geolocation</h1>
-                    Latitute <input type="number" /> <br/>
-                    Longtitute <input  type="number" /><br/>
+                    Latitute <input type="number" id="latitude"/> <br/>
+                    Longtitute <input  type="number" id="longitude"/><br/>
+                    <button className="btn btn-primary" onClick={this.handleGeolocation}>Submit</button>
                     <div>
-                        <GoogleMap />
+                        <GoogleMap
+                        latitude={this.state.latitude}
+                        longitude={this.state.longitude}/>
                     </div>
-                    <Link to="pokeball" className ="btn btn-primary">
+                    <Link to="pokeball" className ="btn btn-primary" onClick={this.handleMonster}>
                         Monster
                     </Link>
                     <button className="btn btn-primary" >Pokestop</button><br/>
@@ -58,22 +78,12 @@ class PostsIndex extends Component {
                     <ul className="list-group">
                     {this.renderPosts()}
                     </ul>
-                    {/*<div className="arrow-up"></div>*/}
-                    {/*<div className="arrow-down"></div>*/}
-                    {/*<div className="arrow-left"></div>*/}
-                    {/*<div className="arrow-right"></div>*/}
-                    <div className="all-arrow">
-                        <a className="up-arrow"> </a>
-                        <a className="right-arrow"> </a>
-                        <a className="left-arrow"> </a>
-                        <a className="down-arrow"> </a>
-                    </div>
+
                     <Link to="login" className ="btn btn-primary">
                         Logout
                     </Link>
                     <div height={'100%'}>
                         {/*{this.renderWeather(lat,lon)}*/}
-
                     </div>
                 </div>
             </div>
@@ -85,4 +95,4 @@ function mapStateToProps(state){
     return { posts: state.posts.all};
 }
 
-export default connect(mapStateToProps,{ fetchPosts }) (PostsIndex);
+export default connect(mapStateToProps,{ fetchPosts,fetchMonster }) (PostsIndex);

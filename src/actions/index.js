@@ -23,8 +23,8 @@ const API_KEY = '?key=lkajdsfapifjghdfghjkw';
 
 export function fetchStatus() {
   //const request = axios.get('http://restricted.dynu.com:8000/status')
-    const request = axios.get('http://localhost:8000/status')
-    console.log('ok')
+    const request = axios.get('http://localhost:8000/api/status')
+    console.log('ok');
     return{
       type: STATUS,
       payload: request
@@ -33,24 +33,27 @@ export function fetchStatus() {
 
 export function login(username,hashed_password) {
   //send username and hashed_password
-    const request = axios.post(`http://localhost:8000/login?username=${username}&hashed_password=${hashed_password}`);
+    const request = axios.post(`http://localhost:8000/api/login`,{
+            "username": `${username}`,
+            "hashed_password": `${hashed_password}`
+    });
     return {
         type: LOGIN,
         payload: request
     };
 }
 
-export function move() {
+export function createMove(lat,lng) {
     //send lat, lon, token
-    const request = axios.put(`link`,props);
+    const request = axios.put(`http://localhost:8000/api/move?latitude=${lat}&longitude=${lng}&token=1`);
     return {
         type: MOVE,
         payload: request
     };
 }
 
-export function fetchMonster() {
-    const request = axios.get(`link/monster`);
+export function fetchMonster(lat,lng) {
+    const request = axios.get(`http://localhost:8000/api/monster?latitude=${lat}&longitude=${lng}&token=1`);
     return{
         type: MONSTER,
         payload: request
@@ -58,7 +61,7 @@ export function fetchMonster() {
 }
 
 export function fetchStopStation(lat,lng) {
-    const request = axios.get(`http://localhost:8000/stopsign?latitude=${lat}&longitude=${lng}&token=1`);
+    const request = axios.get(`http://localhost:8000/api/stopsign?latitude=${lat}&longitude=${lng}&token=1`);
     return{
         type: STOPSIGN,
         payload: request
