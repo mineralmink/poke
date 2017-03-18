@@ -50,7 +50,7 @@ class Login extends Component {
                                             </small>
                                         </p>
                                         <p className='control'>
-                                            <Link to="/pokeball" className ="btn btn-primary" onClick={() =>this.handleLogin(username,hashed_password)}>
+                                            <Link to="/" className ="btn btn-primary" onClick={() =>this.handleLogin(username,hashed_password)}>
                                                 Login
                                             </Link>
                                         </p>
@@ -64,6 +64,7 @@ class Login extends Component {
         );
     }
 }
+
 
 
 

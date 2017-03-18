@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPosts,fetchMonster } from '../actions/index';
+import { fetchPosts,fetchMonster,fetchStopStation } from '../actions/index';
 import { Link } from 'react-router';
-import GoogleMap  from '../component/GoogleMap';
+import GoogleMap from '../component/GoogleMap';
+import _ from 'underscore';
 
 class PostsIndex extends Component {
 
@@ -12,7 +13,7 @@ class PostsIndex extends Component {
     };
     componentWillMount(){
         this.props.fetchPosts();
-        console.log('hello',this.props.fetchPosts())
+        //console.log('hello',this.props.fetchPosts())
         //will call in first time?
     }
     renderPosts(){
@@ -29,7 +30,6 @@ class PostsIndex extends Component {
     }
     
     renderWeather(lat,lon){
-        console.log(lat,lon)
         return(
                 <GoogleMapLoader
                     containerElement= { <div style={{height: '100%'}} /> }
@@ -48,11 +48,23 @@ class PostsIndex extends Component {
     }
 
     handleMonster= () =>{
-        console.log('monster',this.state)
-        this.props.fetchMonster(this.state.latitude,this.state.longitude)
+        //console.log('monster',this.state)
+        const token = this.props.login.login.token;
+        //console.log('token',token);
+        this.props.fetchMonster(this.state.latitude,this.state.longitude,token)
     }
-
+    getLat=(lat,lng) =>{
+        this.setState({
+            latitude: lat,
+            longitude: lng
+        })
+    };
+    handleStopSign = ()=>{
+        const token = this.props.login.login.token;
+        this.props.fetchStopStation(this.state.latitude,this.state.longitude,token)
+    }
     render(){
+        //console.log(this.props.login,_.isNull(this.props.login.login) ? 'esad': this.props.login.login.token)
         return (
             <div>
                 <div className="text-xs-right" >
@@ -63,12 +75,15 @@ class PostsIndex extends Component {
                     <div>
                         <GoogleMap
                         latitude={this.state.latitude}
-                        longitude={this.state.longitude}/>
+                        longitude={this.state.longitude}
+                        getLatitude={this.getLat}
+                        token={_.isNull(this.props.login.login) ? '': this.props.login.login.token}
+                        />
                     </div>
                     <Link to="pokeball" className ="btn btn-primary" onClick={this.handleMonster}>
                         Monster
                     </Link>
-                    <button className="btn btn-primary" >Pokestop</button><br/>
+                    <button className="btn btn-primary" onClick={this.handleStopSign}>StopSign</button><br/>
                     <output className="output"> Output...</output><br/>
                     Speed <input type="number" />
                     <Link to="posts/new" className ="btn btn-primary">
@@ -92,7 +107,9 @@ class PostsIndex extends Component {
 }
 
 function mapStateToProps(state){
-    return { posts: state.posts.all};
+    return { posts: state.posts.all,
+             stopsigns: state.stopsigns,
+             login: state.login };
 }
 
-export default connect(mapStateToProps,{ fetchPosts,fetchMonster }) (PostsIndex);
+export default connect(mapStateToProps,{ fetchPosts,fetchMonster,fetchStopStation }) (PostsIndex);

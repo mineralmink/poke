@@ -1,29 +1,54 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchMonster } from '../actions/index';
+import { fetchMonster,fetchThrow } from '../actions/index';
 import { Link } from 'react-router';
 class Pokeball extends Component {
 
-    componentDidMount(){
-
-    }
+    handleThrow=(ballType)=>{
+         const token = this.props.login.login.token;
+        this.props.fetchThrow(ballType,token,this.props.monster.monster.id)
+    };
 
     render(){
-        console.log('wtf')
-        console.log(this.props)
         return (
                 <div className="text-xs-right">
                     <h3>Monster</h3>
-                    <button className="btn-primary" style={{padding:"5px"}}>Perfect</button>
-                    <button className="btn-primary" style={{padding:"5px"}}>Great</button>
-                    <button className="btn-primary" style={{padding:"5px"}}>Curve</button>
+                    <button
+                        className="btn-primary"
+                        style={{padding:"5px"}}
+                        onClick={()=>this.handleThrow('SMALLBALL')}
+                    >
+                        SMALLBALL
+                    </button>
+                    <button
+                        className="btn-primary"
+                        style={{padding:"5px"}}
+                        onClick={()=>this.handleThrow('MEDIUMBALL')}
+                    >
+                        MEDIUMBALL
+                    </button>
+                    <button
+                        className="btn-primary"
+                        style={{padding:"5px"}}
+                        onClick={()=>this.handleThrow('LARGEBALL')}
+                    >
+                        LARGEBALL
+                    </button>
+                    <button
+                        className="btn-primary"
+                        style={{padding:"5px"}}
+                        onClick={()=>this.handleThrow('GIANTBALL')}
+                    >
+                        GIANTBALL
+                    </button>
                 </div>
         );
     }
 }
 
 function mapStateToProps(state){
-    return { posts: state.posts.all };
+    return { monster: state.monster,
+             login: state.login };
 }
 
-export default connect(mapStateToProps,{ fetchMonster }) (Pokeball);
+export default connect(mapStateToProps,{ fetchMonster,fetchThrow }) (Pokeball);

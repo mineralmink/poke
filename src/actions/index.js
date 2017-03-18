@@ -43,33 +43,33 @@ export function login(username,hashed_password) {
     };
 }
 
-export function createMove(lat,lng) {
+export function createMove(lat,lng,token) {
     //send lat, lon, token
-    const request = axios.put(`http://localhost:8000/api/move?latitude=${lat}&longitude=${lng}&token=1`);
+    const request = axios.put(`http://localhost:8000/api/move?latitude=${lat}&longitude=${lng}&token=${token}`);
     return {
         type: MOVE,
         payload: request
     };
 }
 
-export function fetchMonster(lat,lng) {
-    const request = axios.get(`http://localhost:8000/api/monster?latitude=${lat}&longitude=${lng}&token=1`);
+export function fetchMonster(lat,lng,token) {
+    const request = axios.get(`http://localhost:8000/api/monster?latitude=${lat}&longitude=${lng}&token=${token}`);
     return{
         type: MONSTER,
         payload: request
     };
 }
 
-export function fetchStopStation(lat,lng) {
-    const request = axios.get(`http://localhost:8000/api/stopsign?latitude=${lat}&longitude=${lng}&token=1`);
+export function fetchStopStation(lat,lng,token) {
+    const request = axios.get(`http://localhost:8000/api/stopsigns?latitude=${lat}&longitude=${lng}&token=${token}`);
     return{
         type: STOPSIGN,
         payload: request
     };
 }
 
-export function fetchThrow() {
-    const request = axios.get(`link/throw`);
+export function fetchThrow(ballType,token,monster_id) {
+    const request = axios.get(`http://localhost:8000/api/throw?ball=${ballType}&monster_id=${monster_id}&token=${token}`);
     return{
         type: THROW,
         payload: request

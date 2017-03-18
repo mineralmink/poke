@@ -27,28 +27,12 @@ const AccessingArgumentsExampleGoogleMap = withGoogleMap(props => (
  * Add <script src="https://maps.googleapis.com/maps/api/js"></script> to your HTML to provide google.maps reference
  */
 class AccessingArgumentsExample extends Component {
-    //
-    // componentDidMount(){
-    //     console.log('props',this.props);
-    //     const {latitude,longitude} = this.props;
-    //     if(latitude === null && longitude === null){
-    //         console.log('grg')
-    //     }
-    //     else {
-    //         this.setState({
-    //             center: new google.maps.LatLng(latitude,longitude),
-    //             markers: [
-    //                 ...this.state.markers,
-    //                 { position: new google.maps.LatLng(latitude,longitude)},
-    //             ],
-    //         });
-    //     }
-    // }
+
     componentWillReceiveProps(nextProps){
         if(nextProps !== this.props){
-            console.log('props',this.props,nextProps)
-            console.log('lat',nextProps.latitude)
-            console.log('f',nextProps.latitude)
+            // console.log('props',this.props,nextProps)
+            // console.log('lat',nextProps.latitude)
+            // console.log('f',nextProps.latitude)
             const newLatLng = new google.maps.LatLng(nextProps.latitude,nextProps.longitude);
             this.setState({
                 center: newLatLng,
@@ -67,12 +51,13 @@ class AccessingArgumentsExample extends Component {
     handleMapClick = this.handleMapClick.bind(this);
     
     handleMapClick(event) {
-        console.log('oskffsefjawpesfjprso')
-        console.log(this.state.center.lat())
-        console.log(this.state.center.lng())
+        // console.log(this.state.center.lat())
+        // console.log(this.state.center.lng())
         let lat = this.state.center.lat();
         let lng = this.state.center.lng();
-        this.props.createMove(lat,lng);
+        const token = this.props.token;
+        this.props.createMove(lat,lng,token);
+        this.props.getLatitude(lat,lng);
         this.setState({
             center: event.latLng,
             markers: [
@@ -83,8 +68,8 @@ class AccessingArgumentsExample extends Component {
     }
 
     render() {
-        console.log(this.props);
-        console.log('state',this.state.center.lat());
+        //console.log(this.props);
+        //console.log('state',this.state.center.lat());
         return (
             <AccessingArgumentsExampleGoogleMap
                 containerElement={
