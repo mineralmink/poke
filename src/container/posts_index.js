@@ -85,21 +85,17 @@ class PostsIndex extends Component {
                     </Link>
                     <button className="btn btn-primary" onClick={this.handleStopSign}>StopSign</button><br/>
                     <output className="output"> Output...</output><br/>
-                    Speed <input type="number" />
-                    <Link to="posts/new" className ="btn btn-primary">
-                    Add d
-                    </Link>
-                    <h3>Posts</h3>
-                    <ul className="list-group">
-                    {this.renderPosts()}
-                    </ul>
+                    {/*<Link to="posts/new" className ="btn btn-primary">*/}
+                    {/*Add d*/}
+                    {/*</Link>*/}
+                    {/*<h3>Posts</h3>*/}
+                    {/*<ul className="list-group">*/}
+                    {/*{this.renderPosts()}*/}
+                    {/*</ul>*/}
 
                     <Link to="login" className ="btn btn-primary">
                         Logout
                     </Link>
-                    <div height={'100%'}>
-                        {/*{this.renderWeather(lat,lon)}*/}
-                    </div>
                 </div>
             </div>
         );

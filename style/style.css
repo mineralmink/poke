@@ -39,6 +39,10 @@ input[type=submit]:hover {
   background-color: #45a049;
 }
 
+/*input:empty {*/
+  /*border-color: red;*/
+/*}*/
+
 .text-xs-right{
   border-radius: 5px;
   background-color: #f2f2f2;

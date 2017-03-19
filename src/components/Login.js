@@ -3,10 +3,14 @@
  */
 import React, { Component,PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { login,createUser,fetchStatus } from '../actions/index';
+import { login,fetchStatus } from '../actions/index';
 import { Link } from 'react-router';
+import {browserHistory} from 'react-router';
 class Login extends Component {
 
+    state = {
+        loginStatus: true
+    }
 
     componentDidMount(){
         this.props.fetchStatus();
@@ -15,8 +19,19 @@ class Login extends Component {
     handleLogin(){
         let usr = document.getElementById('username').value;
         let psd = document.getElementById('password').value;
-        this.props.login(usr,psd);
-        console.log('s');
+        if(usr&&psd) {
+            for(let i=0;i<60;i++)
+            {
+                this.props.login(usr, psd);
+            }
+            browserHistory.push('/');
+        }
+        else {
+            this.setState({
+                loginStatus: false
+            })
+        }
+
     }
     handleUsername(){
         let msg = document.getElementById('username').value;
@@ -50,9 +65,18 @@ class Login extends Component {
                                             </small>
                                         </p>
                                         <p className='control'>
-                                            <Link to="/" className ="btn btn-primary" onClick={() =>this.handleLogin(username,hashed_password)}>
+                                            {/*<Link to="/" className ="btn btn-primary" onClick={() =>this.handleLogin(username,hashed_password)}>*/}
+                                                {/*Login*/}
+                                            {/*</Link>*/}
+                                            {!this.state.loginStatus &&
+                                                [
+                                                    <p className="text-warning">Login Error</p>
+                                                ]
+                                            }
+                                            <button  className ="btn btn-primary" onClick={() =>this.handleLogin(username,hashed_password)}>
                                                 Login
-                                            </Link>
+                                            </button>
+
                                         </p>
                                     </div>
                                 </div>
@@ -66,6 +90,9 @@ class Login extends Component {
 }
 
 
+function mapStateToProps(state){
+        return { loginStatus: state.login }
+};
 
 
-export default connect(null,{ fetchStatus,login }) (Login);
+export default connect(mapStateToProps,{ fetchStatus,login }) (Login);

@@ -16,6 +16,7 @@ export const MONSTER = 'MONSTER';
 export const STOPSIGN = 'STOPSIGN';
 export const THROW = 'THROW';
 export const CREATE_USER = 'CREATE_USER';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
 
 const ROOT_URL = 'http://reduxblog.herokuapp.com/api';
@@ -29,6 +30,10 @@ export function fetchStatus() {
       type: STATUS,
       payload: request
     };
+}
+
+export function loginFailure(error) {
+    return {type: LOGIN_FAILURE,error}
 }
 
 export function login(username,hashed_password) {
