@@ -20,11 +20,12 @@ class Login extends Component {
         let usr = document.getElementById('username').value;
         let psd = document.getElementById('password').value;
         if(usr&&psd) {
-            for(let i=0;i<60;i++)
-            {
-                this.props.login(usr, psd);
-            }
-            browserHistory.push('/');
+            // for(let i=0;i<60;i++)
+            // {
+            //     this.props.login(usr, psd);
+            // }
+            this.props.login(usr, psd);
+            browserHistory.push('/main');
         }
         else {
             this.setState({
@@ -61,7 +62,7 @@ class Login extends Component {
                                     <div className='control'>
                                         <p className='control'>
                                             <small >
-                                                <Link to="/" >Forgot Password ?</Link>
+                                                <Link to="/main" >Forgot Password ?</Link>
                                             </small>
                                         </p>
                                         <p className='control'>

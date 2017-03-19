@@ -10,8 +10,9 @@ import LogOn from './components/LogOn';
 
 export default(
   <Route path="/" component={App}>
-    <IndexRoute component={PostsIndex} />
+    <IndexRoute />
       <Route path="login" components={Login}/>
+      <Route path="main" components={PostsIndex}/>
       <Route path="pokeball" component={Pokeball} />
       <Route path="posts/new" component={PostsNew} />
     <Route path="posts/:id" component={PostsShow} />

@@ -74,7 +74,7 @@ export function fetchStopStation(lat,lng,token) {
 }
 
 export function fetchThrow(ballType,token,monster_id) {
-    const request = axios.get(`http://localhost:8000/api/throw?ball=${ballType}&monster_id=${monster_id}&token=${token}`);
+    const request = axios.get(`http://localhost:8000/api/throw?ball=${ballType}&monster_instant_id=${monster_id}&token=${token}`);
     return{
         type: THROW,
         payload: request

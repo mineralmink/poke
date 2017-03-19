@@ -6,13 +6,31 @@ class Pokeball extends Component {
 
     handleThrow=(ballType)=>{
          const token = this.props.login.login.token;
-        this.props.fetchThrow(ballType,token,this.props.monster.monster.id)
+        this.props.fetchThrow(ballType,token,this.props.monster.monster.instant_id)
     };
 
     render(){
         return (
-                <div className="text-xs-right">
-                    <h3>Monster</h3>
+                <div>
+                    {/*<h3>Monster</h3>*/}
+                    <div className="panel panel-info">
+                        <div
+                            className="panel-heading"
+                            style={{"textAlign":"center"}}
+                        >
+                            Monster
+                        </div>
+                        <div
+                            className="panel-body"
+                            style={{"textAlign":"center"}}
+                        >
+                            { this.props.monster.monster &&
+                                <h1>
+                                    ID {this.props.monster.monster.id}
+                                </h1>
+                            }
+                        </div>
+                    </div>
                     <button
                         className="btn-primary"
                         style={{padding:"5px"}}
