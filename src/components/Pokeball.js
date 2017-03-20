@@ -2,14 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMonster,fetchThrow } from '../actions/index';
 import { Link } from 'react-router';
+
 class Pokeball extends Component {
 
     handleThrow=(ballType)=>{
          const token = this.props.login.login.token;
+         console.log('MaMa',this.props,token)
         this.props.fetchThrow(ballType,token,this.props.monster.monster.instant_id)
     };
 
+
     render(){
+        console.log(this.props.throw)
         return (
                 <div>
                     {/*<h3>Monster</h3>*/}
@@ -29,36 +33,50 @@ class Pokeball extends Component {
                                     ID {this.props.monster.monster.id}
                                 </h1>
                             }
+                            { this.props.throw.throw &&
+                                <h3>
+                                    BALL : {this.props.throw.throw.ball} <br/>
+                                    CATCHED : {this.props.throw.throw.catched.toString()} <br/>
+                                    MONSTER ID: {this.props.throw.throw.monster.id} <br/>
+                                </h3>
+                            }
                         </div>
                     </div>
-                    <button
-                        className="btn-primary"
-                        style={{padding:"5px"}}
-                        onClick={()=>this.handleThrow('SMALLBALL')}
-                    >
-                        SMALLBALL
-                    </button>
-                    <button
-                        className="btn-primary"
-                        style={{padding:"5px"}}
-                        onClick={()=>this.handleThrow('MEDIUMBALL')}
-                    >
-                        MEDIUMBALL
-                    </button>
-                    <button
-                        className="btn-primary"
-                        style={{padding:"5px"}}
-                        onClick={()=>this.handleThrow('LARGEBALL')}
-                    >
-                        LARGEBALL
-                    </button>
-                    <button
-                        className="btn-primary"
-                        style={{padding:"5px"}}
-                        onClick={()=>this.handleThrow('GIANTBALL')}
-                    >
-                        GIANTBALL
-                    </button>
+                    <div>
+                        <button
+                            className="btn-primary"
+                            style={{padding:"5px"}}
+                            onClick={()=>this.handleThrow('SMALLBALL')}
+                        >
+                            SMALLBALL
+                        </button>
+                        <button
+                            className="btn-primary"
+                            style={{padding:"5px"}}
+                            onClick={()=>this.handleThrow('MEDIUMBALL')}
+                        >
+                            MEDIUMBALL
+                        </button>
+                        <button
+                            className="btn-primary"
+                            style={{padding:"5px"}}
+                            onClick={()=>this.handleThrow('LARGEBALL')}
+                        >
+                            LARGEBALL
+                        </button>
+                        <button
+                            className="btn-primary"
+                            style={{padding:"5px"}}
+                            onClick={()=>this.handleThrow('GIANTBALL')}
+                        >
+                            GIANTBALL
+                        </button>
+                    </div>
+                    <div>
+                        <Link to="/main" className ="btn btn-primary">
+                            Main
+                        </Link>
+                    </div>
                 </div>
         );
     }
@@ -66,7 +84,8 @@ class Pokeball extends Component {
 
 function mapStateToProps(state){
     return { monster: state.monster,
-             login: state.login };
+             login: state.login,
+             throw: state.throw };
 }
 
 export default connect(mapStateToProps,{ fetchMonster,fetchThrow }) (Pokeball);

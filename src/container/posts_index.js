@@ -1,50 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPosts,fetchMonster,fetchStopStation } from '../actions/index';
+import { fetchMonster,fetchStopStation,createMove } from '../actions/index';
 import { Link } from 'react-router';
 import GoogleMap from '../component/GoogleMap';
+
 import _ from 'underscore';
 
 class PostsIndex extends Component {
 
     state = {
-        latitude: null,
-        longitude: null
+        latitude: 12.811801316582619,
+        longitude: 102.41455078125,
     };
-    componentWillMount(){
-        this.props.fetchPosts();
-        //console.log('hello',this.props.fetchPosts())
-        //will call in first time?
-    }
-    renderPosts(){
-        return this.props.posts.map((post) => {
-            return (
-                <li className="list-group-item" key={post.id}>
-                    <Link to={"posts/"+post.id}>
-                        <span className="pull-xs-right">{post.categories}</span>
-                        <strong>{post.title}</strong>
-                    </Link>
-                </li>
-            )
-        });
-    }
-    
-    renderWeather(lat,lon){
-        return(
-                <GoogleMapLoader
-                    containerElement= { <div style={{height: '100%'}} /> }
-                    googleMapElement= {
-                        <GoogleMap defaultZoom={12} defaultCenter={{lat: 100.5, lng: 13.2}} />
-                    }
-                />
-        );
-    }
 
     handleGeolocation = () => {
+        const token = this.props.login.login.token;
         const lat = +document.getElementById('latitude').value;
         const lon = +document.getElementById('longitude').value;
+        this.props.createMove(lat,lon,token);
         this.setState({ latitude: lat,
-                        longitude: lon });
+                        longitude: lon
+        });
     }
 
     handleMonster= () =>{
@@ -64,13 +40,15 @@ class PostsIndex extends Component {
         this.props.fetchStopStation(this.state.latitude,this.state.longitude,token)
     }
     render(){
+
         //console.log(this.props.login,_.isNull(this.props.login.login) ? 'esad': this.props.login.login.token)
+        const {latitude,longitude} = this.state
         return (
             <div>
                 <div className="text-xs-right" >
                     <h1>Geolocation</h1>
-                    Latitute <input type="number" id="latitude"/> <br/>
-                    Longtitute <input  type="number" id="longitude"/><br/>
+                    Latitute <input type="number" id="latitude" placeholder={latitude}/> <br/>
+                    Longtitute <input  type="number" id="longitude" placeholder={longitude} /><br/>
                     <button className="btn btn-primary" onClick={this.handleGeolocation}>Submit</button>
                     <div>
                         <GoogleMap
@@ -83,16 +61,16 @@ class PostsIndex extends Component {
                     <Link to="pokeball" className ="btn btn-primary" onClick={this.handleMonster}>
                         Monster
                     </Link>
-                    <button className="btn btn-primary" onClick={this.handleStopSign}>StopSign</button><br/>
-                    <output className="output"> Output...</output><br/>
-                    {/*<Link to="posts/new" className ="btn btn-primary">*/}
-                    {/*Add d*/}
-                    {/*</Link>*/}
-                    {/*<h3>Posts</h3>*/}
-                    {/*<ul className="list-group">*/}
-                    {/*{this.renderPosts()}*/}
-                    {/*</ul>*/}
-
+                    <button className="btn btn-primary" onClick={this.handleStopSign}>Stop Station</button><br/>
+                    <Link to="fightstate" className ="btn btn-primary" >
+                        Fight State
+                    </Link>
+                    { this.props.stopsigns.stopsigns &&
+                        [
+                            //console.log(this.props.stopsigns)
+                            <p>{this.props.stopsigns.stopsigns[0].name}</p>
+                        ]
+                    }
                     <Link to="login" className ="btn btn-primary">
                         Logout
                     </Link>
@@ -103,9 +81,10 @@ class PostsIndex extends Component {
 }
 
 function mapStateToProps(state){
-    return { posts: state.posts.all,
+    return {
+             monster:state.monster,
              stopsigns: state.stopsigns,
              login: state.login };
 }
 
-export default connect(mapStateToProps,{ fetchPosts,fetchMonster,fetchStopStation }) (PostsIndex);
+export default connect(mapStateToProps,{ fetchMonster,fetchStopStation,createMove }) (PostsIndex);
