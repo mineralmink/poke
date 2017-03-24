@@ -1,14 +1,16 @@
 
 import { LOGIN_SUCCESS,LOGIN_FAILURE } from '../actions/index';
 
-const INITIAL_STATE ={ login: null };
+const INITIAL_STATE ={ login: null,loginFail:false };
 export default function(state = INITIAL_STATE, action) {
-    console.log('kuft',action.payload)
+    console.log('inglader',action.payload)
     switch(action.type) {
         case LOGIN_SUCCESS:
+            console.log('Successx')
             return { login: action.payload.data };
         case LOGIN_FAILURE:
-            return { login: false};
+            console.log('Fail')
+            return {login: false};
         default:
             return state;
     }

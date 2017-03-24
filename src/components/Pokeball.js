@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMonster,fetchThrow } from '../actions/index';
 import { Link } from 'react-router';
+import cookie from 'react-cookie';
 
 class Pokeball extends Component {
+
 
     handleThrow=(ballType)=>{
          const token = this.props.login.login.token;
          console.log('MaMa',this.props,token)
         this.props.fetchThrow(ballType,token,this.props.monster.monster.instant_id)
     };
-
 
     render(){
         console.log(this.props.throw)

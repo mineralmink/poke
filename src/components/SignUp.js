@@ -3,21 +3,18 @@
  */
 import React, { Component,PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { login,fetchStatus } from '../actions/index';
+import { signup,fetchStatus } from '../actions/index';
 import { Link } from 'react-router';
-import cookie from 'react-cookie';
+import _ from 'underscore';
 import {browserHistory} from 'react-router';
-class Login extends Component {
+import cookie from 'react-cookie';
+
+class SignUp extends Component {
 
     state = {
         loginStatus: true
     }
-    componentDidMount(){
-        //this.props.fetchStatus();
-            this.state =  { blah: cookie.load('blah'),
-                            token: cookie.load('token')
-        };
-    }
+
     handleLogin(){
         let usr = document.getElementById('username').value;
         let psd = document.getElementById('password').value;
@@ -28,9 +25,8 @@ class Login extends Component {
             // {
             //     this.props.login(usr, psd);
             // }
-            this.props.login(usr, psd,avr);
-            cookie.save('blah', usr, { path: '/' });
-               browserHistory.push('/main');
+            this.props.signup(usr, psd, avr);
+            browserHistory.push('/login');
             // if(!_.isNull(this.props.loginResponse.login)){
             //     console.log('login',this.props.loginResponse.login.successful)
             //     browserHistory.push('/main');
@@ -42,13 +38,7 @@ class Login extends Component {
                 loginStatus: false
             })
         }
-        console.log(this.props.loginResponse.loginFail)
-        if(this.props.loginResponse.login){
-            browserHistory.push('/login');
-            this.setState({
-                loginStatus: false
-            })
-        }
+
     }
 
     render(){
@@ -60,14 +50,14 @@ class Login extends Component {
                         <div className='columns'>
                             <div className='column'>
                                 <h1 className='title'>
-                                    Login
+                                    SignUp
                                 </h1>
                                 <div className='login-form'>
                                     <p className='control'>
-                                        <input placeholder="Username" type="text" id="username" onChange={this.handleUsername} />
+                                        <input placeholder="Username" type="text" id="username" />
                                     </p>
                                     <p className='control'>
-                                        <input placeholder="Password" type="password" id='password' onChange={this.handlePassword}  />
+                                        <input placeholder="Password" type="text" id='password' />
                                     </p>
                                     <p className='control'>
                                         <input placeholder="Avatar name" type="text" id='avatarName' />
@@ -80,15 +70,15 @@ class Login extends Component {
                                         </p>
                                         <p className='control'>
                                             {/*<Link to="/" className ="btn btn-primary" onClick={() =>this.handleLogin(username,hashed_password)}>*/}
-                                                {/*Login*/}
+                                            {/*Login*/}
                                             {/*</Link>*/}
                                             {!this.state.loginStatus &&
-                                                [
-                                                    <p className="text-warning">Login Error</p>
-                                                ]
+                                            [
+                                                <p className="text-warning">Login Error</p>
+                                            ]
                                             }
                                             <button  className ="btn btn-primary" onClick={() =>this.handleLogin(username,hashed_password)}>
-                                                Login
+                                                SignUp
                                             </button>
 
                                         </p>
@@ -105,8 +95,8 @@ class Login extends Component {
 
 
 function mapStateToProps(state){
-        return { loginResponse: state.login}
+    return { loginResponse: state.login }
 };
 
 
-export default connect(mapStateToProps,{ fetchStatus,login }) (Login);
+export default connect(mapStateToProps,{ fetchStatus,signup }) (SignUp);

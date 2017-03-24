@@ -2,6 +2,8 @@ import React, { Component,PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { createUser,fetchStatus } from '../actions/index';
 import { Link } from 'react-router';
+import cookie from 'react-cookie';
+
 
 class LogOn extends Component {
 

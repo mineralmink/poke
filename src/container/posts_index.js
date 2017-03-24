@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchMonster,fetchStopStation,createMove } from '../actions/index';
+import cookie from 'react-cookie';
+import { fetchMonster,fetchStopStation,createMove,fetchMonsterBag,fetchLeaderboard } from '../actions/index';
 import { Link } from 'react-router';
 import GoogleMap from '../component/GoogleMap';
+
 
 import _ from 'underscore';
 
@@ -12,7 +14,21 @@ class PostsIndex extends Component {
         latitude: 12.811801316582619,
         longitude: 102.41455078125,
     };
+    componentWillMount() {
+            this.state = {
+                token: cookie.load('token'),
+                blah: cookie.load('blah')
+        };
+    }
 
+    componentWillReceiveProps(nextProps){
+        if(!_.isNull(nextProps)){
+            this.state = {
+                token: cookie.load('token'),
+                blah: cookie.load('blah')
+            };
+        }
+    }
     handleGeolocation = () => {
         const token = this.props.login.login.token;
         const lat = +document.getElementById('latitude').value;
@@ -26,8 +42,12 @@ class PostsIndex extends Component {
     handleMonster= () =>{
         //console.log('monster',this.state)
         const token = this.props.login.login.token;
+        const random = Math.random();
         //console.log('token',token);
-        this.props.fetchMonster(this.state.latitude,this.state.longitude,token)
+        // if(random>0.5) {
+        //     this.props.fetchMonster(this.state.latitude, this.state.longitude, token)
+        // }
+        this.props.fetchMonster(this.state.latitude, this.state.longitude, token)
     }
     getLat=(lat,lng) =>{
         this.setState({
@@ -39,10 +59,17 @@ class PostsIndex extends Component {
         const token = this.props.login.login.token;
         this.props.fetchStopStation(this.state.latitude,this.state.longitude,token)
     }
+    handleMonsterBag = () =>{
+        const token = this.props.login.login.token;
+        this.props.fetchMonsterBag(token);
+    }
+    handleLeaderboard = () =>{
+        this.props.fetchLeaderboard();
+    }
     render(){
-
         //console.log(this.props.login,_.isNull(this.props.login.login) ? 'esad': this.props.login.login.token)
         const {latitude,longitude} = this.state
+        console.log('token',this.state.token)
         return (
             <div>
                 <div className="text-xs-right" >
@@ -62,8 +89,16 @@ class PostsIndex extends Component {
                         Monster
                     </Link>
                     <button className="btn btn-primary" onClick={this.handleStopSign}>Stop Station</button><br/>
-                    <Link to="fightstate" className ="btn btn-primary" >
-                        Fight State
+
+                    {/*<button className="btn btn-primary" onClick={this.handleMonsterBag}>Monster Bag</button><br/>*/}
+                    <Link to="monsterbag" className="btn btn-primary" onClick={this.handleMonsterBag}>
+                        Monster Bag
+                    </Link>
+                    <Link to="stage" className ="btn btn-primary" >
+                        Fight Stage
+                    </Link>
+                    <Link to="leaderboard" className="btn btn-primary" onClick={this.handleLeaderboard}>
+                        Leaderboard
                     </Link>
                     { this.props.stopsigns.stopsigns &&
                         [
@@ -84,7 +119,9 @@ function mapStateToProps(state){
     return {
              monster:state.monster,
              stopsigns: state.stopsigns,
-             login: state.login };
+             login: state.login,
+             monsterbag: state.monsterbag
+    };
 }
 
-export default connect(mapStateToProps,{ fetchMonster,fetchStopStation,createMove }) (PostsIndex);
+export default connect(mapStateToProps,{ fetchMonster,fetchStopStation,createMove,fetchMonsterBag,fetchLeaderboard }) (PostsIndex);
