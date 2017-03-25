@@ -6,14 +6,10 @@ import { connect } from 'react-redux';
 import { fetchMonsterBag } from '../actions/index';
 import { Link } from 'react-router';
 import _ from 'underscore';
-import cookie from 'react-cookie';
+
 
 class MonsterBag extends Component {
 
-    componentDidMount(){
-        this.state =  { blah: cookie.load('blah'),
-            token: cookie.load('token')};
-    }
 
     handleMonsterBag = (monster) =>{
         return (

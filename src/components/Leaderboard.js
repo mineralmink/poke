@@ -2,16 +2,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import _ from 'underscore';
-import cookie from 'react-cookie';
+
 
 class Leaderboard extends Component {
 
-
-    componentDidMount(){
-        this.state =  { blah: cookie.load('blah'),
-                        token: cookie.load('token')};
-    }
 
     handleAvatar = (avatar) =>{
     return (

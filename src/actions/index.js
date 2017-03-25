@@ -1,5 +1,5 @@
 import axios from 'axios';
-import cookie from 'react-cookie';
+import { saveToCookie, removeCookieWithValue,getValueFromCookie, _COOKIE } from '../components/Cookie';
 export const SPEED = 'SPEED';
 export const STATUS = 'STATUS';
 export const LOGIN = 'LOGIN';
@@ -35,19 +35,19 @@ export function fetchStatus() {
 
 
 
-export function login(username,hashed_password,avatar_name) {
+export function login(username,hashed_password) {
   //send username and hashed_password
     return function(dispatch) {
         axios.post(`http://localhost:8000/api/login`,{
-            "avatar_name":`${avatar_name}`,
             "username": `${username}`,
             "hashed_password": `${hashed_password}`
         })
             .then((response) => {
                 const token = response.data.token;
-                cookie.save('token', token, {path: '/'});
-                const a = cookie.load('token');
-                console.log('toto',cookie.save('token', token, {path: '/'}))
+                console.log('token',token)
+                //removeCookieWithValue('tok')
+                saveToCookie('tok',token.toString())
+                console.log(getValueFromCookie('tok'))
                 dispatch(loginSuccess(response))
             })
             .catch((err) => {
@@ -57,7 +57,7 @@ export function login(username,hashed_password,avatar_name) {
     }
 }
 function loginSuccess(response) {
-    console.log('res',response);
+    //console.log('res',response);
     //cookie.save('token', response.data.token, {path: '/'});
     return {
         type: LOGIN_SUCCESS,

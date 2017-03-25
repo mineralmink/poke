@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMonsterBag,fetchAiMonster,fetchFight } from '../actions/index';
 import { Link } from 'react-router';
+import {getValueFromCookie } from '../components/Cookie';
 import _ from 'underscore';
-import cookie from 'react-cookie';
 
 class MonsterBag extends Component {
 
@@ -12,10 +12,8 @@ class MonsterBag extends Component {
         ai_instant_id: null,
         p_instant_id: null,
     }
-    componentDidMount(){
+    componentDidMount() {
         this.props.fetchAiMonster();
-        this.state =  { blah: cookie.load('blah'),
-            token: cookie.load('token')};
     }
     handleOnChange = () =>{
         const mon = document.getElementById('selectMonster').options[document.getElementById("selectMonster").selectedIndex].value;
@@ -28,7 +26,7 @@ class MonsterBag extends Component {
     handleOnFight = () => {
         const p_instant_id = this.state.p_instant_id;
         const ai_instant_id = this.state.ai_instant_id;
-        const token = this.props.login.login.token;
+        const token = getValueFromCookie('tok')
         this.props.fetchFight(p_instant_id,ai_instant_id,token);
     }
     handleMonsterBag = (monsters) =>{

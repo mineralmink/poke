@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import cookie from 'react-cookie';
 import { fetchMonster,fetchStopStation,createMove,fetchMonsterBag,fetchLeaderboard } from '../actions/index';
 import { Link } from 'react-router';
 import GoogleMap from '../component/GoogleMap';
+import { saveToCookie, removeCookieWithValue,getValueFromCookie, _COOKIE } from '../components/Cookie';
 
 
 import _ from 'underscore';
@@ -15,22 +15,12 @@ class PostsIndex extends Component {
         longitude: 102.41455078125,
     };
     componentWillMount() {
-            this.state = {
-                token: cookie.load('token'),
-                blah: cookie.load('blah')
-        };
+        console.log('tokeAczn',getValueFromCookie('tok'));
     }
 
-    componentWillReceiveProps(nextProps){
-        if(!_.isNull(nextProps)){
-            this.state = {
-                token: cookie.load('token'),
-                blah: cookie.load('blah')
-            };
-        }
-    }
+
     handleGeolocation = () => {
-        const token = this.props.login.login.token;
+        const token = getValueFromCookie('tok')
         const lat = +document.getElementById('latitude').value;
         const lon = +document.getElementById('longitude').value;
         this.props.createMove(lat,lon,token);
@@ -40,8 +30,8 @@ class PostsIndex extends Component {
     }
 
     handleMonster= () =>{
+        const token = getValueFromCookie('tok')
         //console.log('monster',this.state)
-        const token = this.props.login.login.token;
         const random = Math.random();
         //console.log('token',token);
         // if(random>0.5) {
@@ -56,20 +46,22 @@ class PostsIndex extends Component {
         })
     };
     handleStopSign = ()=>{
-        const token = this.props.login.login.token;
+        const token = getValueFromCookie('tok')
         this.props.fetchStopStation(this.state.latitude,this.state.longitude,token)
     }
     handleMonsterBag = () =>{
-        const token = this.props.login.login.token;
+        const token = getValueFromCookie('tok')
         this.props.fetchMonsterBag(token);
     }
     handleLeaderboard = () =>{
         this.props.fetchLeaderboard();
     }
+    handleLogout = () =>{
+        removeCookieWithValue('tok');
+    }
     render(){
         //console.log(this.props.login,_.isNull(this.props.login.login) ? 'esad': this.props.login.login.token)
         const {latitude,longitude} = this.state
-        console.log('token',this.state.token)
         return (
             <div>
                 <div className="text-xs-right" >
@@ -94,7 +86,7 @@ class PostsIndex extends Component {
                     <Link to="monsterbag" className="btn btn-primary" onClick={this.handleMonsterBag}>
                         Monster Bag
                     </Link>
-                    <Link to="stage" className ="btn btn-primary" >
+                    <Link to="stage" className ="btn btn-primary" onClick={this.handleMonsterBag}>
                         Fight Stage
                     </Link>
                     <Link to="leaderboard" className="btn btn-primary" onClick={this.handleLeaderboard}>
@@ -106,7 +98,7 @@ class PostsIndex extends Component {
                             <p>{this.props.stopsigns.stopsigns[0].name}</p>
                         ]
                     }
-                    <Link to="login" className ="btn btn-primary">
+                    <Link to="login" className ="btn btn-primary" onClick={this.handleLogout}>
                         Logout
                     </Link>
                 </div>

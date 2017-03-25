@@ -5,32 +5,23 @@ import React, { Component,PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { login,fetchStatus } from '../actions/index';
 import { Link } from 'react-router';
-import cookie from 'react-cookie';
 import {browserHistory} from 'react-router';
 class Login extends Component {
 
     state = {
         loginStatus: true
     }
-    componentDidMount(){
-        //this.props.fetchStatus();
-            this.state =  { blah: cookie.load('blah'),
-                            token: cookie.load('token')
-        };
-    }
+
     handleLogin(){
         let usr = document.getElementById('username').value;
         let psd = document.getElementById('password').value;
-        let avr = document.getElementById('avatarName').value;
-
-        if(usr&&psd&&avr) {
+        if(usr&&psd) {
             // for(let i=0;i<60;i++)
             // {
             //     this.props.login(usr, psd);
             // }
-            this.props.login(usr, psd,avr);
-            cookie.save('blah', usr, { path: '/' });
-               browserHistory.push('/main');
+            this.props.login(usr, psd);
+            browserHistory.push('/main');
             // if(!_.isNull(this.props.loginResponse.login)){
             //     console.log('login',this.props.loginResponse.login.successful)
             //     browserHistory.push('/main');
@@ -69,9 +60,7 @@ class Login extends Component {
                                     <p className='control'>
                                         <input placeholder="Password" type="password" id='password' onChange={this.handlePassword}  />
                                     </p>
-                                    <p className='control'>
-                                        <input placeholder="Avatar name" type="text" id='avatarName' />
-                                    </p>
+
                                     <div className='control'>
                                         <p className='control'>
                                             <small >

@@ -2,6 +2,8 @@
 import React,{Component} from 'react'
 import { connect } from 'react-redux';
 import { createMove } from '../actions/index';
+import {getValueFromCookie } from '../components/Cookie';
+
 import {
     withGoogleMap,
     GoogleMap,
@@ -55,7 +57,7 @@ class AccessingArgumentsExample extends Component {
         // console.log(this.state.center.lng())
         let lat = this.state.center.lat();
         let lng = this.state.center.lng();
-        const token = this.props.token;
+        const token = getValueFromCookie('tok')
         this.props.createMove(lat,lng,token);
         this.props.getLatitude(lat,lng);
         this.setState({
