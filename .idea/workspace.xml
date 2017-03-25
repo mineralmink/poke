@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="04e62f86-2138-4ad7-b048-9f70f7e103d9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/index.js" afterPath="$PROJECT_DIR$/src/actions/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/component/GoogleMap.js" afterPath="$PROJECT_DIR$/src/component/GoogleMap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/container/posts_index.js" afterPath="$PROJECT_DIR$/src/container/posts_index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/reducer_relogin.js" afterPath="$PROJECT_DIR$/src/reducers/reducer_relogin.js" />
-    </list>
+    <list default="true" id="04e62f86-2138-4ad7-b048-9f70f7e103d9" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -504,12 +497,12 @@
       <workItem from="1489652551048" duration="725000" />
       <workItem from="1489807473001" duration="58006000" />
       <workItem from="1490154609052" duration="52644000" />
-      <workItem from="1490430382446" duration="9085000" />
+      <workItem from="1490430382446" duration="9304000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="197406000" />
+    <option name="totallyTimeSpent" value="197625000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
