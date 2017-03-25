@@ -1,8 +1,9 @@
 /* global google */
 import React,{Component} from 'react'
 import { connect } from 'react-redux';
-import { createMove } from '../actions/index';
-import {getValueFromCookie } from '../components/Cookie';
+import { createMove,isTokenExired,relogin } from '../actions/index';
+import {getValueFromCookie,saveToCookie } from '../components/Cookie';
+import _ from 'underscore';
 
 import {
     withGoogleMap,
@@ -29,6 +30,12 @@ const AccessingArgumentsExampleGoogleMap = withGoogleMap(props => (
  * Add <script src="https://maps.googleapis.com/maps/api/js"></script> to your HTML to provide google.maps reference
  */
 class AccessingArgumentsExample extends Component {
+
+    constructor() {
+        super();
+        this.handleRenewToken = _.debounce(this.handleRenewToken, 100);
+        this.handleNewCookie = _.debounce(this.handleNewCookie,100);
+    }
 
     componentWillReceiveProps(nextProps){
         if(nextProps !== this.props){
@@ -58,6 +65,8 @@ class AccessingArgumentsExample extends Component {
         let lat = this.state.center.lat();
         let lng = this.state.center.lng();
         const token = getValueFromCookie('tok')
+        this.props.isTokenExired(token);
+        this.handleRenewToken();
         this.props.createMove(lat,lng,token);
         this.props.getLatitude(lat,lng);
         this.setState({
@@ -68,7 +77,16 @@ class AccessingArgumentsExample extends Component {
             ],
         });
     }
-
+    handleNewCookie = () =>{
+        const newtoken = this.props.re_login.relogin.token;
+        saveToCookie('tok',newtoken)
+    }
+    handleRenewToken = () =>{
+        const token = getValueFromCookie('tok')
+        const tokencheck = this.props.tokencheck.token_check;
+        if(tokencheck){this.props.relogin(token);}
+        this.handleNewCookie();
+    }
     render() {
         //console.log(this.props);
         //console.log('state',this.state.center.lat());
@@ -87,5 +105,13 @@ class AccessingArgumentsExample extends Component {
         );
     }
 }
-
-export default connect(null,{ createMove }) (AccessingArgumentsExample);
+function mapStateToProps(state){
+    return {
+        monster:state.monster,
+        stopsigns: state.stopsigns,
+        login: state.login,
+        tokencheck: state.tokencheck,
+        re_login: state.relogin
+    };
+}
+export default connect(mapStateToProps,{ createMove,isTokenExired,relogin }) (AccessingArgumentsExample);

@@ -4,6 +4,7 @@ import { fetchMonster,fetchStopStation,createMove,fetchMonsterBag,fetchLeaderboa
 import { Link } from 'react-router';
 import GoogleMap from '../component/GoogleMap';
 
+
 import { saveToCookie, removeCookieWithValue,getValueFromCookie, _COOKIE } from '../components/Cookie';
 
 
@@ -11,24 +12,34 @@ import _ from 'underscore';
 
 class PostsIndex extends Component {
 
-    state = {
-        latitude: 12.811801316582619,
-        longitude: 102.41455078125,
-    };
-    componentWillMount() {
-       // console.log('tokeAczn',getValueFromCookie('tok'));
-        // const token = getValueFromCookie('tok')
-        // this.props.isTokenExired(token);
-        // const tokencheck = this.props.tokencheck.token_check;
-        // if(tokencheck){this.props.relogin(token);}
+
+    constructor() {
+        super();
+        this.state = {
+            latitude: 12.811801316582619,
+            longitude: 102.41455078125,
+        };
+        this.handleRenewToken = _.debounce(this.handleRenewToken, 100);
+        this.handleNewCookie = _.debounce(this.handleNewCookie,100);
     }
 
-
+    handleNewCookie = () =>{
+        console.log('relogin',this.props.re_login.relogin.token)
+        const newtoken = this.props.re_login.relogin.token;
+        saveToCookie('tok',newtoken)
+    }
+    handleRenewToken = () =>{
+        console.log('hjvouhvkgvk')
+        const token = getValueFromCookie('tok')
+        const tokencheck = this.props.tokencheck.token_check;
+        console.log('token',tokencheck)
+        if(tokencheck){this.props.relogin(token);}
+        this.handleNewCookie();
+    }
     handleGeolocation = () => {
         const token = getValueFromCookie('tok')
         this.props.isTokenExired(token);
-        const tokencheck = this.props.tokencheck.token_check;
-        if(tokencheck){this.props.relogin(token);}
+        this.handleRenewToken();
         const lat = +document.getElementById('latitude').value;
         const lon = +document.getElementById('longitude').value;
         this.props.createMove(lat,lon,token);
@@ -40,9 +51,8 @@ class PostsIndex extends Component {
     handleMonster= () =>{
         const token = getValueFromCookie('tok')
         this.props.isTokenExired(token);
-        const tokencheck = this.props.tokencheck.token_check;
+        this.handleRenewToken();
         console.log('tokencheckMonster',tokencheck)
-        if(tokencheck){this.props.relogin(token);}
         //console.log('monster',this.state)
         const random = Math.random();
         //console.log('token',token);
@@ -51,6 +61,7 @@ class PostsIndex extends Component {
         // }
         this.props.fetchMonster(this.state.latitude, this.state.longitude, token)
     }
+
     getLat=(lat,lng) =>{
         this.setState({
             latitude: lat,
@@ -61,8 +72,7 @@ class PostsIndex extends Component {
     handleMonsterBag = () =>{
         const token = getValueFromCookie('tok')
         this.props.isTokenExired(token);
-        const tokencheck = this.props.tokencheck.token_check;
-        if(tokencheck){this.props.relogin(token);}
+        this.handleRenewToken();
         this.props.fetchMonsterBag(token);
     }
     handleLeaderboard = () =>{
@@ -90,7 +100,7 @@ class PostsIndex extends Component {
                         token={_.isNull(this.props.login.login) ? '': this.props.login.login.token}
                         />
                     </div>
-                    <Link to="pokeball" className ="btn btn-primary" onClick={this.handleMonster}>
+                    <Link  className ="btn btn-primary" onClick={this.handleMonster}>
                         Monster
                     </Link>
 
@@ -126,7 +136,7 @@ function mapStateToProps(state){
              login: state.login,
              monsterbag: state.monsterbag,
              tokencheck: state.tokencheck,
-             relogin: state.relogin
+             re_login: state.relogin
     };
 }
 

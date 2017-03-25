@@ -270,7 +270,7 @@ export function isTokenExired(token){
 }
 
 export function relogin(token) {
-    const request = axios.get(`http://localhost:8000/api/renew/token?token=${token}`);
+    const request = axios.get(`http://localhost:8000/api/renew?token=${token}`);
     return{
         type: RELOGIN,
         payload: request
