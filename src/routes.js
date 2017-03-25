@@ -12,7 +12,7 @@ import Leaderboard from './components/Leaderboard';
 
 export default(
   <Route path="/" component={App}>
-    <IndexRoute />
+    <IndexRoute components={Login}/>
       <Route path="signup" components={SignUp}/>
       <Route path="login" components={Login}/>
       <Route path="main" components={PostsIndex}/>

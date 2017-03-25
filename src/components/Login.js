@@ -64,7 +64,7 @@ class Login extends Component {
                                     <div className='control'>
                                         <p className='control'>
                                             <small >
-                                                <Link to="/main" >Forgot Password ?</Link>
+                                                <Link to="/main" >Forgot Password ?</Link> or <Link to="/signup" > Sign up</Link>
                                             </small>
                                         </p>
                                         <p className='control'>
