@@ -6,6 +6,7 @@ import ThrowReducer from './reducer_throw';
 import MonsterBagReducer from './reducer_monster_bag';
 import AiMonster from './reducer_ai_monster';
 import LeaderboardReducer from './reducer_leaderboard';
+import TokenCheck from './reducer_token_check';
 import { reducer as formReducer } from 'redux-form';
 
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     monsterbag: MonsterBagReducer,
     aimonster: AiMonster,
     leaderboard: LeaderboardReducer,
+    tokencheck: TokenCheck,
     form: formReducer
 });
 

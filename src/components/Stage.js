@@ -64,6 +64,7 @@ class MonsterBag extends Component {
     }
 
     render(){
+        console.log('des',this.props.tokencheck.tokencheck)
         console.log('monsterbag',this.props.monsterbag);
         const monsterbag = this.props.monsterbag.monsterbag;
         const aimonster = this.props.aimonster.aimonster;
@@ -127,7 +128,8 @@ class MonsterBag extends Component {
 function mapStateToProps(state){
     return {login: state.login,
             monsterbag: state.monsterbag,
-            aimonster: state.aimonster};
+            aimonster: state.aimonster,
+            tokencheck: state.tokencheck};
 }
 
 export default connect(mapStateToProps,{ fetchMonsterBag,fetchAiMonster,fetchFight }) (MonsterBag);

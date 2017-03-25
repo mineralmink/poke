@@ -261,7 +261,7 @@ export function createUser(props){
 }
 
 export function isTokenExired(token){
-    const request = axios.get(`http://localhost:8080/api/check/token?token=${token}`);
+    const request = axios.get(`http://localhost:8000/api/check/token?token=${token}`);
     return{
         type: TOKEN,
         payload: request
