@@ -21,6 +21,7 @@ export const MONSTER_BAG_FAILURE = 'MONSTER_BAG_FAILURE';
 export const AI_MONSTER = 'AI_MONSTER';
 export const FIGHT = 'FIGHT';
 export const LEADERBOARD = 'LEADERBOARD';
+export const TOKEN = 'TOKEN';
 
 
 
@@ -252,9 +253,17 @@ export function fetchThrow(ballType,token,monster_id) {
 
 
 export function createUser(props){
-    const request = axios.post(`localhost:8000/login?`,props);
+    const request = axios.post(`http://localhost:8000/login?`,props);
     return {
-        type:CREATE_USER,
+        type: CREATE_USER,
+        payload: request
+    };
+}
+
+export function isTokenExired(token){
+    const request = axios.get(`http://localhost:8080/api/check/token?token=${token}`);
+    return{
+        type: TOKEN,
         payload: request
     };
 }

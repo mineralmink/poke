@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMonster,fetchThrow } from '../actions/index';
 import { Link } from 'react-router';
-import {getValueFromCookie } from '../components/Cookie';
+import { getValueFromCookie } from '../components/Cookie';
 
 class Pokeball extends Component {
 
