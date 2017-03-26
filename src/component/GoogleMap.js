@@ -78,12 +78,15 @@ class AccessingArgumentsExample extends Component {
         });
     }
     handleNewCookie = () =>{
-        const newtoken = this.props.re_login.relogin.token;
-        saveToCookie('tok',newtoken)
+        if(!_.isNull(this.props.re_login.relogin)) {
+            const newtoken = this.props.re_login.relogin.token;
+            saveToCookie('tok', newtoken)
+        }
     }
     handleRenewToken = () =>{
         const token = getValueFromCookie('tok')
         const tokencheck = this.props.tokencheck.token_check;
+        console.log(tokencheck)
         if(tokencheck){this.props.relogin(token);}
         this.handleNewCookie();
     }

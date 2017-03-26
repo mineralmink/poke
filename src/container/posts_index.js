@@ -20,21 +20,25 @@ class PostsIndex extends Component {
             longitude: 102.41455078125,
         };
         this.handleRenewToken = _.debounce(this.handleRenewToken, 100);
-        this.handleNewCookie = _.debounce(this.handleNewCookie,100);
+      //  this.handleNewCookie = _.debounce(this.handleNewCookie,200);
     }
-
-    handleNewCookie = () =>{
-        console.log('relogin',this.props.re_login.relogin.token)
-        const newtoken = this.props.re_login.relogin.token;
-        saveToCookie('tok',newtoken)
-    }
+    //
+    // handleNewCookie = () =>{
+    //     if(!_.isNull(this.props.re_login)) {
+    //         const newtoken = this.props.re_login.relogin.token;
+    //         saveToCookie('tok', newtoken)
+    //     }
+    // }
     handleRenewToken = () =>{
-        console.log('hjvouhvkgvk')
         const token = getValueFromCookie('tok')
         const tokencheck = this.props.tokencheck.token_check;
-        console.log('token',tokencheck)
-        if(tokencheck){this.props.relogin(token);}
-        this.handleNewCookie();
+        if(tokencheck){
+            console.log()
+            this.props.relogin(token);
+            //this.handleNewCookie();
+            const newtoken = this.props.re_login.relogin.token;
+            saveToCookie('tok', newtoken)
+        }
     }
     handleGeolocation = () => {
         const token = getValueFromCookie('tok')
@@ -50,16 +54,15 @@ class PostsIndex extends Component {
 
     handleMonster= () =>{
         const token = getValueFromCookie('tok')
+        this.props.fetchMonster(this.state.latitude, this.state.longitude, token)
         this.props.isTokenExired(token);
         this.handleRenewToken();
-        console.log('tokencheckMonster',tokencheck)
         //console.log('monster',this.state)
         const random = Math.random();
         //console.log('token',token);
         // if(random>0.5) {
         //     this.props.fetchMonster(this.state.latitude, this.state.longitude, token)
         // }
-        this.props.fetchMonster(this.state.latitude, this.state.longitude, token)
     }
 
     getLat=(lat,lng) =>{
@@ -84,7 +87,6 @@ class PostsIndex extends Component {
     render(){
         //console.log(this.props.login,_.isNull(this.props.login.login) ? 'esad': this.props.login.login.token)
         const {latitude,longitude} = this.state
-        console.log('tokencheck',this.props.tokencheck.token_check)
         return (
             <div>
                 <div className="text-xs-right" >
@@ -100,7 +102,7 @@ class PostsIndex extends Component {
                         token={_.isNull(this.props.login.login) ? '': this.props.login.login.token}
                         />
                     </div>
-                    <Link  className ="btn btn-primary" onClick={this.handleMonster}>
+                    <Link to="pokeball" className ="btn btn-primary" onClick={this.handleMonster}>
                         Monster
                     </Link>
 

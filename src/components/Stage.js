@@ -6,16 +6,27 @@ import { Link } from 'react-router';
 import {getValueFromCookie } from '../components/Cookie';
 import _ from 'underscore';
 
-class MonsterBag extends Component {
+class Stage extends Component {
 
     state ={
         ai_instant_id: null,
         p_instant_id: null,
+        isFight:false
+    }
+    componentWillReceiveProps(nextProps){
+        if(!this.props.monsterbag.monsterbag && nextProps.monsterbag.monsterbag){
+            console.log('fekm',nextProps.monsterbag.monsterbag[0])
+            this.setState({ p_instant_id: nextProps.monsterbag.monsterbag[0].instant_id})
+        }
+        if(!this.props.aimonster.aimonster && nextProps.aimonster.aimonster){
+            this.setState({ ai_instant_id: nextProps.aimonster.aimonster.instant_id})
+        }
     }
     componentDidMount() {
         this.props.fetchAiMonster();
     }
     handleOnChange = () =>{
+        console.log('onchange')
         const mon = document.getElementById('selectMonster').options[document.getElementById("selectMonster").selectedIndex].value;
         console.log(mon);
         this.setState({
@@ -28,6 +39,9 @@ class MonsterBag extends Component {
         const ai_instant_id = this.state.ai_instant_id;
         const token = getValueFromCookie('tok')
         this.props.fetchFight(p_instant_id,ai_instant_id,token);
+        this.setState ({
+            isFight: !this.state.isFight
+        })
     }
     handleMonsterBag = (monsters) =>{
         return (
@@ -64,11 +78,12 @@ class MonsterBag extends Component {
     }
 
     render(){
-        console.log('des',this.props.tokencheck.tokencheck)
-        console.log('monsterbag',this.props.monsterbag);
+        // console.log('des',this.props.tokencheck.tokencheck)
+        // console.log('monsterbag',this.props.monsterbag);
+        console.log('s',this.props.fight)
         const monsterbag = this.props.monsterbag.monsterbag;
         const aimonster = this.props.aimonster.aimonster;
-        console.log(monsterbag)
+        //console.log(monsterbag)
         return (
             <div>
                 {/*<h3>Monster</h3>*/}
@@ -77,16 +92,19 @@ class MonsterBag extends Component {
                         className="panel-heading"
                         style={{"textAlign":"center"}}
                     >
-                        Monster Bag
+                         Fight Stage
                     </div>
                     <div
                         className="panel-body"
                         style={{"textAlign":"center"}}
                     >
                         { !_.isNull(monsterbag) &&
-                            <select id='selectMonster' onChange={this.handleOnChange}>
+                            <div>
+                                Choose your Monster : <br/>
+                                <select id='selectMonster' onChange={this.handleOnChange}>
                                 { this.handleMonsterBag(monsterbag)}
                             </select>
+                            </div>
                         }
                         { !_.isNull(aimonster) &&
                             <div
@@ -110,13 +128,27 @@ class MonsterBag extends Component {
                                 </div>
                             </div>
                         }
+                        {
+                            !_.isNull(this.props.fight.fight) && this.state.isFight &&
+                                <div>
+                                Winner :{ this.props.fight.fight ? 'You' : 'Enermy'}
+                                </div>
+                        }
                     </div>
                 </div>
-                <button onClick={this.handleOnFight} className="btn btn-danger">
-                    Fight !
-                </button>
-                <div>
-                    <Link to="/main" className ="btn btn-primary">
+                <div className="col-sm-6">
+                    <button onClick={this.handleOnFight} className="btn btn-danger">
+                        Fight !
+                    </button>
+                </div>
+                <div
+                    className="col-sm-6"
+                    style ={{"padding-left":"40%"}}
+                >
+                    <Link
+                        to="/main"
+                        className ="btn btn-primary"
+                    >
                         Main
                     </Link>
                 </div>
@@ -129,7 +161,9 @@ function mapStateToProps(state){
     return {login: state.login,
             monsterbag: state.monsterbag,
             aimonster: state.aimonster,
-            tokencheck: state.tokencheck};
+            tokencheck: state.tokencheck,
+            fight: state.fight
+    };
 }
 
-export default connect(mapStateToProps,{ fetchMonsterBag,fetchAiMonster,fetchFight }) (MonsterBag);
+export default connect(mapStateToProps,{ fetchMonsterBag,fetchAiMonster,fetchFight }) (Stage);

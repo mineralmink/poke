@@ -6,36 +6,40 @@ import { Link } from 'react-router';
 
 class Leaderboard extends Component {
 
-
+    //
+    // handleAvatar = (avatar) =>{
+    // return (
+    //     <div key={avatar.name}
+    //          className="panel panel-default"
+    //          style={{
+    //              "display":"flex",
+    //              "width":"50%"
+    //          }}
+    //     >
+    //
+    //         <div
+    //             className="panel-body"
+    //         >
+    //             <div className="row">
+    //             <div className="col-sm-4" style={{"textAlign":"left"}}>
+    //                 {avatar.username}
+    //                 </div>
+    //                 <div className="col-sm-4" style={{"textAlign":"right"}}>
+    //                 {avatar.score}
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     </div>
+    //     )
+   // }
     handleAvatar = (avatar) =>{
-    return (
-        <div key={avatar.name}
-             className="panel panel-default"
-             style={{
-                 "display":"flex",
-                 "width":"50%"
-             }}
-        >
-
-            <div
-                className="panel-body"
-            >
-                <p
-                    style={{"float":"left"}}
-                >
-
-                    {avatar.username}
-                </p>
-                <p
-                    style={{"float":"right"}}
-                >
-                    {avatar.score}
-                </p>
-            </div>
-        </div>
+        return (
+            <tr>
+            <td className="text-left">k</td>
+            <td className="text-left">m</td>
+            </tr>
         )
     }
-
     render(){
         const leaderboard = this.props.leaderboard.leaderboard;
         console.log(leaderboard)
@@ -47,24 +51,38 @@ class Leaderboard extends Component {
                         className="panel-heading"
                         style={{"textAlign":"center"}}
                     >
-                        Monster Bag
+                        Leaderboard
                     </div>
                     <div
                         className="panel-body"
                         style={{"textAlign":"center"}}
                     >
                         { leaderboard &&
-                            [
-                                leaderboard.map( avatar =>
-                                    this.handleAvatar(avatar)
-                                )
-                            ]
-
+                                <table className="table-fill">
+                                    <thead>
+                                    <tr>
+                                        <th className="text-left">Avatar Name</th>
+                                        <th className="text-left">Score</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody className="table-hover">
+                                         {
+                                            leaderboard.map( avatar =>
+                                                <tr>
+                                                    <td className="text-left">{avatar.username}</td>
+                                                    <td className="text-left">{avatar.score}</td>
+                                                </tr>
+                                        )}
+                                    </tbody>
+                                </table>
                         }
                     </div>
                 </div>
-                <div>
-                    <Link to="/main" className ="btn btn-primary">
+                <div style ={{"padding-left":"80%"}}>
+                    <Link
+                        to="/main"
+                        className ="btn btn-primary"
+                    >
                         Main
                     </Link>
                 </div>

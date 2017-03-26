@@ -8,6 +8,7 @@ import AiMonster from './reducer_ai_monster';
 import LeaderboardReducer from './reducer_leaderboard';
 import TokenCheck from './reducer_token_check';
 import Relogin from './reducer_relogin';
+import FightReducer from './reducer_fight';
 import { reducer as formReducer } from 'redux-form';
 
 const rootReducer = combineReducers({
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
     leaderboard: LeaderboardReducer,
     tokencheck: TokenCheck,
     relogin: Relogin,
+    fight:FightReducer,
     form: formReducer
 });
 
