@@ -53,8 +53,8 @@ class AccessingArgumentsExample extends Component {
         }
     }
     state = {
-        markers: [],
-        center: new google.maps.LatLng(12.811801316582619, 102.41455078125),
+        markers: [ ],
+        center: new google.maps.LatLng(13.730046, 100.778366),
     };
 
     handleMapClick = this.handleMapClick.bind(this);

@@ -16,8 +16,8 @@ class PostsIndex extends Component {
     constructor() {
         super();
         this.state = {
-            latitude: 12.811801316582619,
-            longitude: 102.41455078125,
+            latitude: 13.730046,
+            longitude: 100.778366,
             showMove: false
         };
         this.handleRenewToken = _.debounce(this.handleRenewToken, 100);

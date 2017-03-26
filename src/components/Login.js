@@ -26,8 +26,14 @@ class Login extends Component {
     }
     handlePushMain(){
         if(!this.props.loginResponse.loginFail){
-            browserHistory.push('/main');
+            if(!_.isNull(this.props.loginResponse.login.cheater)){
+                browserHistory.push('/cheater');
+            }
+            else {
+                browserHistory.push('/main');
+            }
         }
+
     }
     handleLogin(){
         let usr = document.getElementById('username').value;
@@ -51,7 +57,7 @@ class Login extends Component {
         console.log(this.props.loginResponse.loginFail)
         if(this.props.loginResponse.login){
             browserHistory.push('/login');
-            
+
         }
     }
 

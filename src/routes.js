@@ -9,6 +9,7 @@ import SignUp from './components/SignUp';
 import MonsterBag from './components/MonsterBag';
 import Stage from './components/Stage';
 import Leaderboard from './components/Leaderboard';
+import Cheater from './components/Cheater';
 
 export default(
   <Route path="/" component={App}>
@@ -21,6 +22,7 @@ export default(
       <Route path="monsterbag" components={MonsterBag}/>
       <Route path="stage" components={Stage}/>
       <Route path="leaderboard" components={Leaderboard} />
+      <Route path="cheater" components={Cheater}/>
   </Route>
 );
 
