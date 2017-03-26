@@ -6,12 +6,30 @@ import { connect } from 'react-redux';
 import { login,fetchStatus } from '../actions/index';
 import { Link } from 'react-router';
 import {browserHistory} from 'react-router';
+import _ from 'underscore';
+
 class Login extends Component {
 
-    state = {
-        loginStatus: true
+    constructor() {
+        super();
+        this.state = {
+            loginStatus: true
+        }
+        this.handlePushMain = _.debounce(this.handlePushMain, 100);
     }
-
+    componentWillReceiveProps(nextProps){
+            if(nextProps.loginResponse.loginFail){
+                this.setState({
+                    loginStatus: false
+                })
+            }
+    }
+    handlePushMain(){
+        console.log('sdc',this.props.loginResponse.loginFail)
+        if(!this.props.loginResponse.loginFail){
+            browserHistory.push('/main');
+        }
+    }
     handleLogin(){
         let usr = document.getElementById('username').value;
         let psd = document.getElementById('password').value;
@@ -21,11 +39,9 @@ class Login extends Component {
             //     this.props.login(usr, psd);
             // }
             this.props.login(usr, psd);
-            browserHistory.push('/main');
-            // if(!_.isNull(this.props.loginResponse.login)){
-            //     console.log('login',this.props.loginResponse.login.successful)
-            //     browserHistory.push('/main');
-            // }
+            //console.log('thisprops',this.props.loginStatus)
+            //browserHistory.push('/main');
+            this.handlePushMain()
 
         }
         else {
@@ -75,6 +91,16 @@ class Login extends Component {
                                                 [
                                                     <p className="text-warning">Login Error</p>
                                                 ]
+                                            }
+                                            {
+                                                !_.isNull((this.props.loginResponse.errorMessage)) &&
+                                                <p className="text-warning">
+                                                    {
+                                                        this.props.loginResponse.errorMessage
+                                                    }
+                                                </p>
+
+
                                             }
                                             <button  className ="btn btn-primary" onClick={() =>this.handleLogin(username,hashed_password)}>
                                                 Login
