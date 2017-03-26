@@ -32,14 +32,7 @@ class Leaderboard extends Component {
     //     </div>
     //     )
    // }
-    handleAvatar = (avatar) =>{
-        return (
-            <tr>
-            <td className="text-left">k</td>
-            <td className="text-left">m</td>
-            </tr>
-        )
-    }
+
     render(){
         const leaderboard = this.props.leaderboard.leaderboard;
         console.log(leaderboard)

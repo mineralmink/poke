@@ -15,7 +15,6 @@ class Stage extends Component {
     }
     componentWillReceiveProps(nextProps){
         if(!this.props.monsterbag.monsterbag && nextProps.monsterbag.monsterbag){
-            console.log('fekm',nextProps.monsterbag.monsterbag[0])
             this.setState({ p_instant_id: nextProps.monsterbag.monsterbag[0].instant_id})
         }
         if(!this.props.aimonster.aimonster && nextProps.aimonster.aimonster){

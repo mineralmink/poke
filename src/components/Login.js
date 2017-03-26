@@ -15,7 +15,7 @@ class Login extends Component {
         this.state = {
             loginStatus: true
         }
-        this.handlePushMain = _.debounce(this.handlePushMain, 100);
+        this.handlePushMain = _.debounce(this.handlePushMain, 200);
     }
     componentWillReceiveProps(nextProps){
             if(nextProps.loginResponse.loginFail){
@@ -25,7 +25,6 @@ class Login extends Component {
             }
     }
     handlePushMain(){
-        console.log('sdc',this.props.loginResponse.loginFail)
         if(!this.props.loginResponse.loginFail){
             browserHistory.push('/main');
         }
@@ -52,9 +51,7 @@ class Login extends Component {
         console.log(this.props.loginResponse.loginFail)
         if(this.props.loginResponse.login){
             browserHistory.push('/login');
-            this.setState({
-                loginStatus: false
-            })
+            
         }
     }
 

@@ -33,7 +33,7 @@ class AccessingArgumentsExample extends Component {
 
     constructor() {
         super();
-        this.handleRenewToken = _.debounce(this.handleRenewToken, 100);
+        this.handleRenewToken = _.debounce(this.handleRenewToken, 200);
         this.handleNewCookie = _.debounce(this.handleNewCookie,100);
     }
 
@@ -58,17 +58,21 @@ class AccessingArgumentsExample extends Component {
     };
 
     handleMapClick = this.handleMapClick.bind(this);
-    
+    // handleAgain=()=>{
+    //     const token = getValueFromCookie('tok')
+    //     this.props.isTokenExired(token);
+    //     this.handleRenewToken();
+    // }
     handleMapClick(event) {
-        // console.log(this.state.center.lat())
-        // console.log(this.state.center.lng())
+         console.log(this.state.center.lat())
+         console.log(this.state.center.lng())
         let lat = this.state.center.lat();
         let lng = this.state.center.lng();
         const token = getValueFromCookie('tok')
+        console.log('token',token)
         this.props.isTokenExired(token);
         this.handleRenewToken();
         this.props.createMove(lat,lng,token);
-        this.props.getLatitude(lat,lng);
         this.setState({
             center: event.latLng,
             markers: [
@@ -77,22 +81,38 @@ class AccessingArgumentsExample extends Component {
             ],
         });
     }
-    handleNewCookie = () =>{
-        if(!_.isNull(this.props.re_login.relogin)) {
+    // handleNewCookie = () =>{
+    //     console.log('relogin',this.props.re_login.relogin)
+    //     if(!_.isNull(this.props.re_login.relogin)) {
+    //         console.log('renewtoken',newtoken)
+    //         const newtoken = this.props.re_login.relogin.token;
+    //         saveToCookie('tok', newtoken)
+    //     }
+    // }
+
+    // handleRenewToken = () =>{
+    //     const token = getValueFromCookie('tok')
+    //     this.props.relogin(token);
+    //     //const tokencheck = this.props.tokencheck.token_check;
+    //     //if(tokencheck){this.props.relogin(token);}
+    //     this.handleNewCookie();
+    // }
+
+    handleRenewToken = () =>{
+        const token = getValueFromCookie('tok')
+        const tokencheck = this.props.tokencheck.token_check;
+        console.log('tokenchk',tokencheck)
+        if(tokencheck){
+            console.log('is token chech')
+            this.props.relogin(token);
             const newtoken = this.props.re_login.relogin.token;
             saveToCookie('tok', newtoken)
         }
     }
-    handleRenewToken = () =>{
-        const token = getValueFromCookie('tok')
-        const tokencheck = this.props.tokencheck.token_check;
-        console.log(tokencheck)
-        if(tokencheck){this.props.relogin(token);}
-        this.handleNewCookie();
-    }
     render() {
         //console.log(this.props);
         //console.log('state',this.state.center.lat());
+
         return (
             <AccessingArgumentsExampleGoogleMap
                 containerElement={

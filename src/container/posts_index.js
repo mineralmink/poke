@@ -18,6 +18,7 @@ class PostsIndex extends Component {
         this.state = {
             latitude: 12.811801316582619,
             longitude: 102.41455078125,
+            showMove: false
         };
         this.handleRenewToken = _.debounce(this.handleRenewToken, 100);
       //  this.handleNewCookie = _.debounce(this.handleNewCookie,200);
@@ -32,8 +33,8 @@ class PostsIndex extends Component {
     handleRenewToken = () =>{
         const token = getValueFromCookie('tok')
         const tokencheck = this.props.tokencheck.token_check;
+        console.log('token',token)
         if(tokencheck){
-            console.log()
             this.props.relogin(token);
             //this.handleNewCookie();
             const newtoken = this.props.re_login.relogin.token;
@@ -47,6 +48,7 @@ class PostsIndex extends Component {
         const lat = +document.getElementById('latitude').value;
         const lon = +document.getElementById('longitude').value;
         this.props.createMove(lat,lon,token);
+        this.handleShowGeo(lat,lon)
         this.setState({ latitude: lat,
                         longitude: lon
         });
@@ -77,13 +79,19 @@ class PostsIndex extends Component {
         this.props.isTokenExired(token);
         this.handleRenewToken();
         this.props.fetchMonsterBag(token);
-    }
+    };
     handleLeaderboard = () =>{
         this.props.fetchLeaderboard();
-    }
+    };
     handleLogout = () =>{
         removeCookieWithValue('tok');
-    }
+    };
+    handleShowGeo = (lat,lng) =>{
+        console.log('lat',lat,lng)
+        this.setState({
+            showMove:true
+        })
+    };
     render(){
         //console.log(this.props.login,_.isNull(this.props.login.login) ? 'esad': this.props.login.login.token)
         const {latitude,longitude} = this.state
@@ -116,12 +124,7 @@ class PostsIndex extends Component {
                     <Link to="leaderboard" className="btn btn-primary" onClick={this.handleLeaderboard}>
                         Leaderboard
                     </Link>
-                    { this.props.stopsigns.stopsigns &&
-                        [
-                            //console.log(this.props.stopsigns)
-                            <p>{this.props.stopsigns.stopsigns[0].name}</p>
-                        ]
-                    }
+
                     <Link to="login" className ="btn btn-primary" onClick={this.handleLogout}>
                         Logout
                     </Link>
