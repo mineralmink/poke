@@ -54,16 +54,16 @@ class Leaderboard extends Component {
                                 <table className="table-fill">
                                     <thead>
                                     <tr>
-                                        <th className="text-left">Avatar Name</th>
-                                        <th className="text-left">Score</th>
+                                        <th className="text-center">Username</th>
+                                        <th className="text-center">Score</th>
                                     </tr>
                                     </thead>
                                     <tbody className="table-hover">
                                          {
                                             leaderboard.map( avatar =>
                                                 <tr>
-                                                    <td className="text-left">{avatar.username}</td>
-                                                    <td className="text-left">{avatar.score}</td>
+                                                    <td className="text-center">{avatar.username}</td>
+                                                    <td className="text-center">{avatar.score}</td>
                                                 </tr>
                                         )}
                                     </tbody>

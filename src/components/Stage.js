@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMonsterBag,fetchAiMonster,fetchFight } from '../actions/index';
@@ -11,7 +10,6 @@ class Stage extends Component {
     state ={
         ai_instant_id: null,
         p_instant_id: null,
-        isFight:false
     }
     componentWillReceiveProps(nextProps){
         if(!this.props.monsterbag.monsterbag && nextProps.monsterbag.monsterbag){
@@ -38,9 +36,6 @@ class Stage extends Component {
         const ai_instant_id = this.state.ai_instant_id;
         const token = getValueFromCookie('tok')
         this.props.fetchFight(p_instant_id,ai_instant_id,token);
-        this.setState ({
-            isFight: !this.state.isFight
-        })
     }
     handleMonsterBag = (monsters) =>{
         return (

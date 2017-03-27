@@ -41,18 +41,18 @@ class PostsIndex extends Component {
             saveToCookie('tok', newtoken)
         }
     }
-    handleGeolocation = () => {
-        const token = getValueFromCookie('tok')
-        this.props.isTokenExired(token);
-        this.handleRenewToken();
-        const lat = +document.getElementById('latitude').value;
-        const lon = +document.getElementById('longitude').value;
-        this.props.createMove(lat,lon,token);
-        this.handleShowGeo(lat,lon)
-        this.setState({ latitude: lat,
-                        longitude: lon
-        });
-    }
+    // handleGeolocation = () => {
+    //     const token = getValueFromCookie('tok')
+    //     this.props.isTokenExired(token);
+    //     this.handleRenewToken();
+    //     const lat = +document.getElementById('latitude').value;
+    //     const lon = +document.getElementById('longitude').value;
+    //     this.props.createMove(lat,lon,token);
+    //     this.handleShowGeo(lat,lon);
+    //     this.setState({ latitude: lat,
+    //                     longitude: lon
+    //     });
+    // }
 
     handleMonster= () =>{
         const token = getValueFromCookie('tok')
@@ -101,11 +101,10 @@ class PostsIndex extends Component {
                     <h1>Geolocation</h1>
                     Latitute <input type="number" id="latitude" placeholder={latitude}/> <br/>
                     Longtitute <input  type="number" id="longitude" placeholder={longitude} /><br/>
-                    <button className="btn btn-primary" onClick={this.handleGeolocation}>Submit</button>
+                    {/*<button className="btn btn-primary" onClick={this.handleGeolocation}>Submit</button>*/}
                     <div>
                         <GoogleMap
-                        latitude={this.state.latitude}
-                        longitude={this.state.longitude}
+
                         getLatitude={this.getLat}
                         token={_.isNull(this.props.login.login) ? '': this.props.login.login.token}
                         />

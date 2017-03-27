@@ -13,7 +13,7 @@ class Pokeball extends Component {
         const token = getValueFromCookie('tok')
         this.props.fetchThrow(ballType,token,this.props.monster.monster.instant_id)
         this.setState({
-            isThrow: !this.state.isThrow
+            isThrow: true
         })
     };
 
