@@ -123,7 +123,7 @@ class Stage extends Component {
                             </div>
                         }
                         {
-                            !_.isNull(this.props.fight.fight) && this.state.isFight &&
+                            !_.isNull(this.props.fight.fight) &&
                                 <div>
                                 Winner :{ this.props.fight.fight ? 'You' : 'Enermy'}
                                 </div>
@@ -131,7 +131,7 @@ class Stage extends Component {
                     </div>
                 </div>
                 <div className="col-sm-6">
-                    <button onClick={this.handleOnFight} className="btn btn-danger">
+                    <button onClick={this.handleOnFight} className="btn btn-danger" >
                         Fight !
                     </button>
                 </div>

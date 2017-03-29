@@ -113,7 +113,7 @@ class PostsIndex extends Component {
                         Monster
                     </Link>
 
-                    {/*<button className="btn btn-primary" onClick={this.handleMonsterBag}>Monster Bag</button><br/>*/}
+                    <button className="btn btn-primary" onClick={this.handleMonsterBag}>Monster Bag</button><br/>
                     <Link to="monsterbag" className="btn btn-primary" onClick={this.handleMonsterBag}>
                         Monster Bag
                     </Link>

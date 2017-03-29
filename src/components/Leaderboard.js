@@ -54,7 +54,7 @@ class Leaderboard extends Component {
                                 <table className="table-fill">
                                     <thead>
                                     <tr>
-                                        <th className="text-center">Username</th>
+                                        <th className="text-center">Avatar name</th>
                                         <th className="text-center">Score</th>
                                     </tr>
                                     </thead>

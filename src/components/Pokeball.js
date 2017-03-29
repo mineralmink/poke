@@ -7,14 +7,14 @@ import { getValueFromCookie } from '../components/Cookie';
 class Pokeball extends Component {
 
     state = {
-        isThrow:false
+        isThrow:true
     };
     handleThrow=(ballType)=>{
         const token = getValueFromCookie('tok')
         this.props.fetchThrow(ballType,token,this.props.monster.monster.instant_id)
-        this.setState({
-            isThrow: true
-        })
+        // this.setState({
+        //     isThrow: true
+        // })
     };
 
     render(){
