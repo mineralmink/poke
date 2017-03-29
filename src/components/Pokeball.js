@@ -7,15 +7,20 @@ import { getValueFromCookie } from '../components/Cookie';
 class Pokeball extends Component {
 
     state = {
-        isThrow:true
+        isThrow:false
     };
     handleThrow=(ballType)=>{
         const token = getValueFromCookie('tok')
         this.props.fetchThrow(ballType,token,this.props.monster.monster.instant_id)
-        // this.setState({
-        //     isThrow: true
-        // })
+        this.setState({
+            isThrow: true
+        })
     };
+    componentWillMount(){
+        // this.setState({
+        //     isThrow: false
+        // })
+    }
 
     render(){
         console.log(this.props.throw)
@@ -39,12 +44,18 @@ class Pokeball extends Component {
                                     NAME {this.props.monster.monster.name}
                                 </h1>
                             }
-                            { this.props.throw.throw && this.state.isThrow &&
-                                <h3>
-                                    BALL : {this.props.throw.throw.ball} <br/>
-                                    CATCHED : {this.props.throw.throw.catched.toString()} <br/>
-                                    MONSTER ID: {this.props.throw.throw.monster.id} <br/>
-                                </h3>
+                            {
+                                this.props.throw.throw && this.state.isThrow &&
+                                    <h3>
+                                        ---OUTPUT---<br/>
+
+                                        GOT IT? : {this.props.throw.throw.catched.toString()}<br/>
+
+                                        CAUGHT : {this.props.throw.throw.monster.name} <br/>
+                                        ID : {this.props.throw.throw.monster.id} <br/>
+                                        BALL : {this.props.throw.throw.ball} <br/>
+
+                                    </h3>
                             }
                         </div>
                     </div>
