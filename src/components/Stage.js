@@ -36,6 +36,7 @@ class Stage extends Component {
         const ai_instant_id = this.state.ai_instant_id;
         const token = getValueFromCookie('tok')
         this.props.fetchFight(p_instant_id,ai_instant_id,token);
+        this.refs.fightbtn.setAttribute("disabled", "disabled");
     }
     handleMonsterBag = (monsters) =>{
         return (
@@ -131,7 +132,7 @@ class Stage extends Component {
                     </div>
                 </div>
                 <div className="col-sm-6">
-                    <button onClick={this.handleOnFight} className="btn btn-danger" >
+                    <button ref="fightbtn" onClick={this.handleOnFight} className="btn btn-danger" >
                         Fight !
                     </button>
                 </div>
