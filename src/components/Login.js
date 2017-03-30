@@ -13,14 +13,14 @@ class Login extends Component {
     constructor() {
         super();
         this.state = {
-            loginStatus: true
+            loginFail: false
         }
         this.handlePushMain = _.debounce(this.handlePushMain, 200);
     }
     componentWillReceiveProps(nextProps){
             if(nextProps.loginResponse.loginFail){
                 this.setState({
-                    loginStatus: false
+                    loginFail: true
                 })
             }
     }
@@ -51,7 +51,7 @@ class Login extends Component {
         }
         else {
             this.setState({
-                loginStatus: false
+                loginFail: true
             })
         }
         console.log(this.props.loginResponse.loginFail)
@@ -90,13 +90,13 @@ class Login extends Component {
                                             {/*<Link to="/" className ="btn btn-primary" onClick={() =>this.handleLogin(username,hashed_password)}>*/}
                                                 {/*Login*/}
                                             {/*</Link>*/}
-                                            {!this.state.loginStatus &&
+                                            {this.state.loginFail &&
                                                 [
                                                     <p className="text-warning">Login Error</p>
                                                 ]
                                             }
                                             {
-                                                !_.isNull((this.props.loginResponse.errorMessage)) &&
+                                                !_.isNull((this.props.loginResponse.errorMessage)) && this.state.loginFail &&
                                                 <p className="text-warning">
                                                     {
                                                         this.props.loginResponse.errorMessage

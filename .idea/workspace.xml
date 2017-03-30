@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="04e62f86-2138-4ad7-b048-9f70f7e103d9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/component/GoogleMap.js" afterPath="$PROJECT_DIR$/src/component/GoogleMap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Stage.js" afterPath="$PROJECT_DIR$/src/components/Stage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/container/posts_index.js" afterPath="$PROJECT_DIR$/src/container/posts_index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Login.js" afterPath="$PROJECT_DIR$/src/components/Login.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -47,7 +44,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GoogleMap.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GoogleMap.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/component/GoogleMap.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="301">
@@ -123,11 +120,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Login.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Login.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="33" column="13" lean-forward="false" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+            <state relative-caret-position="1365">
+              <caret line="98" column="122" lean-forward="false" selection-start-line="98" selection-start-column="122" selection-end-line="98" selection-end-column="122" />
               <folding />
             </state>
           </provider>
@@ -216,13 +213,13 @@
         <option value="$PROJECT_DIR$/src/reducers/reducer_login.js" />
         <option value="$PROJECT_DIR$/src/actions/index.js" />
         <option value="$PROJECT_DIR$/src/components/Cheater.js" />
-        <option value="$PROJECT_DIR$/src/components/Login.js" />
         <option value="$PROJECT_DIR$/src/routes.js" />
         <option value="$PROJECT_DIR$/src/components/Leaderboard.js" />
         <option value="$PROJECT_DIR$/src/components/Pokeball.js" />
         <option value="$PROJECT_DIR$/src/components/Stage.js" />
         <option value="$PROJECT_DIR$/src/container/posts_index.js" />
         <option value="$PROJECT_DIR$/src/component/GoogleMap.js" />
+        <option value="$PROJECT_DIR$/src/components/Login.js" />
       </list>
     </option>
   </component>
@@ -504,7 +501,7 @@
       <workItem from="1490430382446" duration="31654000" />
       <workItem from="1490776921290" duration="2809000" />
       <workItem from="1490807174521" duration="3520000" />
-      <workItem from="1490859103489" duration="2490000" />
+      <workItem from="1490859103489" duration="3142000" />
     </task>
     <task id="LOCAL-00001" summary="fix fight btn">
       <created>1490777768312</created>
@@ -517,7 +514,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="228794000" />
+    <option name="totallyTimeSpent" value="229446000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
@@ -833,14 +830,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="33" column="13" lean-forward="false" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Leaderboard.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="497">
@@ -892,6 +881,14 @@
           <folding>
             <element signature="e#20#57#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1365">
+          <caret line="98" column="122" lean-forward="false" selection-start-line="98" selection-start-column="122" selection-end-line="98" selection-end-column="122" />
+          <folding />
         </state>
       </provider>
     </entry>
