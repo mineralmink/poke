@@ -10,6 +10,7 @@ class Stage extends Component {
     state ={
         ai_instant_id: null,
         p_instant_id: null,
+        isFight: false
     }
     componentWillReceiveProps(nextProps){
         if(!this.props.monsterbag.monsterbag && nextProps.monsterbag.monsterbag){
@@ -39,6 +40,9 @@ class Stage extends Component {
         const token = getValueFromCookie('tok')
         this.props.fetchFight(p_instant_id,ai_instant_id,token);
         this.refs.fightbtn.setAttribute("disabled", "disabled");
+        this.setState({
+            isFight:true
+        })
     }
     handleMonsterBag = (monsters) =>{
         return (
@@ -126,7 +130,7 @@ class Stage extends Component {
                             </div>
                         }
                         {
-                            !_.isNull(this.props.fight.fight) &&
+                            !_.isNull(this.props.fight.fight) && this.state.isFight &&
                                 <div>
                                 Winner :{ this.props.fight.fight ? 'You' : 'Enermy'}
                                 </div>
