@@ -132,7 +132,7 @@ class Stage extends Component {
                                     style={{"textAlign": "center"}}
 
                                 >
-                                    ENERMY'S MONSTER :
+                                    ENEMY'S MONSTER :
                                     {aimonster.name}
                                 </div>
                                 <div
@@ -147,7 +147,7 @@ class Stage extends Component {
                         {
                             !_.isNull(this.props.fight.fight) && this.state.isFight &&
                                 <div>
-                                Winner :{ this.props.fight.fight ? 'You' : 'Enermy'}
+                                Winner :{ this.props.fight.fight ? ' You' : ' Enemy'}
                                 </div>
                         }
                     </div>
