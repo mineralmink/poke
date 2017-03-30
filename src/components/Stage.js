@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchMonsterBag,fetchAiMonster,fetchFight } from '../actions/index';
+import { fetchMonsterBag,fetchAiMonster,fetchFight,isTokenExired } from '../actions/index';
 import { Link } from 'react-router';
 import {getValueFromCookie } from '../components/Cookie';
 import _ from 'underscore';
@@ -20,6 +20,8 @@ class Stage extends Component {
         }
     }
     componentDidMount() {
+        const token = getValueFromCookie('tok')
+        this.props.fetchMonsterBag(token);
         this.props.fetchAiMonster();
     }
     handleOnChange = () =>{
@@ -161,4 +163,4 @@ function mapStateToProps(state){
     };
 }
 
-export default connect(mapStateToProps,{ fetchMonsterBag,fetchAiMonster,fetchFight }) (Stage);
+export default connect(mapStateToProps,{ fetchMonsterBag,fetchAiMonster,fetchFight,isTokenExired }) (Stage);

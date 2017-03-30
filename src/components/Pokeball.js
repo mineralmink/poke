@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchMonster,fetchThrow } from '../actions/index';
 import { Link } from 'react-router';
 import { getValueFromCookie } from '../components/Cookie';
+import _ from 'underscore';
 
 class Pokeball extends Component {
 
@@ -55,6 +56,13 @@ class Pokeball extends Component {
                                         ID : {this.props.throw.throw.monster.id} <br/>
                                         BALL : {this.props.throw.throw.ball} <br/>
 
+                                    </h3>
+                            }
+                            {
+                                _.isUndefined(this.props.throw.throw) && this.state.isThrow &&
+                                    <h3>
+                                        ---OUTPUT---<br/>
+                                        MONSTER DISAPPEARED
                                     </h3>
                             }
                         </div>

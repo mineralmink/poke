@@ -69,7 +69,6 @@ class AccessingArgumentsExample extends Component {
         let lat = this.state.center.lat();
         let lng = this.state.center.lng();
         const token = getValueFromCookie('tok')
-        console.log('token',token)
         this.props.isTokenExired(token);
         this.handleRenewToken();
         this.props.createMove(lat,lng,token);
@@ -101,9 +100,7 @@ class AccessingArgumentsExample extends Component {
     handleRenewToken = () =>{
         const token = getValueFromCookie('tok')
         const tokencheck = this.props.tokencheck.token_check;
-        console.log('tokenchk',tokencheck)
         if(tokencheck){
-            console.log('is token chech')
             this.props.relogin(token);
             const newtoken = this.props.re_login.relogin.token;
             saveToCookie('tok', newtoken)
