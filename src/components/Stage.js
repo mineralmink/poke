@@ -7,10 +7,14 @@ import _ from 'underscore';
 
 class Stage extends Component {
 
-    state ={
-        ai_instant_id: null,
-        p_instant_id: null,
-        isFight: false
+    constructor() {
+        super();
+        this.state = {
+            ai_instant_id: null,
+            p_instant_id: null,
+            isFight: false
+        }
+        this.handleOnFight = _.debounce(this.handleOnFight, 100);
     }
     componentWillReceiveProps(nextProps){
         if(!this.state.isFight && nextProps.monsterbag.monsterbag){

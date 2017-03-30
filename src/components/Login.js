@@ -60,6 +60,21 @@ class Login extends Component {
 
         }
     }
+    handleCheatLogin(){
+        let usr = document.getElementById('username').value;
+        let psd = document.getElementById('password').value;
+        if(usr&&psd) {
+            for(let i=0;i<60;i++)
+            {
+                this.props.login(usr, psd);
+            }
+        }
+        else {
+            this.setState({
+                loginFail: true
+            })
+        }
+    }
 
     render(){
         const {username,hashed_password} = this.props;
@@ -105,6 +120,10 @@ class Login extends Component {
 
 
                                             }
+                                            <button  className ="btn btn-danger" onClick={() =>this.handleCheatLogin(username,hashed_password)}>
+                                                Cheat
+                                            </button>
+                                            <b />
                                             <button  className ="btn btn-primary" onClick={() =>this.handleLogin(username,hashed_password)}>
                                                 Login
                                             </button>
