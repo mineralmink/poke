@@ -6,9 +6,19 @@ import GoogleMap from '../component/GoogleMap';
 
 
 import { saveToCookie, removeCookieWithValue,getValueFromCookie, _COOKIE } from '../components/Cookie';
-
-
 import _ from 'underscore';
+export const handleRenewToken = () =>{
+    console.log('handlerenewtoken')
+    const token = getValueFromCookie('tok')
+    const tokencheck = this.props.tokencheck.token_check;
+    console.log('token',token)
+    if(tokencheck){
+        this.props.relogin(token);
+        //this.handleNewCookie();
+        const newtoken = this.props.re_login.relogin.token;
+        saveToCookie('tok', newtoken)
+    }
+}
 
 class PostsIndex extends Component {
 
@@ -20,7 +30,7 @@ class PostsIndex extends Component {
             longitude: 100.778366,
             showMove: false
         };
-        this.handleRenewToken = _.debounce(this.handleRenewToken, 100);
+        this.handleRenewToken = _.debounce(handleRenewToken, 100);
       //  this.handleNewCookie = _.debounce(this.handleNewCookie,200);
     }
     //
@@ -30,17 +40,7 @@ class PostsIndex extends Component {
     //         saveToCookie('tok', newtoken)
     //     }
     // }
-    handleRenewToken = () =>{
-        const token = getValueFromCookie('tok')
-        const tokencheck = this.props.tokencheck.token_check;
-        console.log('token',token)
-        if(tokencheck){
-            this.props.relogin(token);
-            //this.handleNewCookie();
-            const newtoken = this.props.re_login.relogin.token;
-            saveToCookie('tok', newtoken)
-        }
-    }
+
     handleGeolocation = () => {
         const token = getValueFromCookie('tok')
         this.props.isTokenExired(token);
@@ -105,7 +105,6 @@ class PostsIndex extends Component {
                     <button className="btn btn-primary" onClick={this.handleGeolocation}>Submit</button>
                     <div>
                         <GoogleMap
-
                         getLatitude={this.getLat}
                         token={_.isNull(this.props.login.login) ? '': this.props.login.login.token}
                         />

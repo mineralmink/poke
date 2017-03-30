@@ -71,6 +71,7 @@ class AccessingArgumentsExample extends Component {
         const token = getValueFromCookie('tok')
         this.props.isTokenExired(token);
         this.handleRenewToken();
+        this.props.getLatitude(lat,lng)
         this.props.createMove(lat,lng,token);
         this.setState({
             center: event.latLng,
@@ -80,22 +81,7 @@ class AccessingArgumentsExample extends Component {
             ],
         });
     }
-    // handleNewCookie = () =>{
-    //     console.log('relogin',this.props.re_login.relogin)
-    //     if(!_.isNull(this.props.re_login.relogin)) {
-    //         console.log('renewtoken',newtoken)
-    //         const newtoken = this.props.re_login.relogin.token;
-    //         saveToCookie('tok', newtoken)
-    //     }
-    // }
 
-    // handleRenewToken = () =>{
-    //     const token = getValueFromCookie('tok')
-    //     this.props.relogin(token);
-    //     //const tokencheck = this.props.tokencheck.token_check;
-    //     //if(tokencheck){this.props.relogin(token);}
-    //     this.handleNewCookie();
-    // }
 
     handleRenewToken = () =>{
         const token = getValueFromCookie('tok')

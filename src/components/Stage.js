@@ -13,10 +13,10 @@ class Stage extends Component {
         isFight: false
     }
     componentWillReceiveProps(nextProps){
-        if(!this.props.monsterbag.monsterbag && nextProps.monsterbag.monsterbag){
+        if(!this.state.isFight && nextProps.monsterbag.monsterbag){
             this.setState({ p_instant_id: nextProps.monsterbag.monsterbag[0].instant_id})
         }
-        if(!this.props.aimonster.aimonster && nextProps.aimonster.aimonster){
+        if(!this.state.isFight && nextProps.aimonster.aimonster){
             this.setState({ ai_instant_id: nextProps.aimonster.aimonster.instant_id})
         }
     }
@@ -38,11 +38,22 @@ class Stage extends Component {
         const p_instant_id = this.state.p_instant_id;
         const ai_instant_id = this.state.ai_instant_id;
         const token = getValueFromCookie('tok')
+        this.props.isTokenExired(token);
+        this.handleRenewToken();
         this.props.fetchFight(p_instant_id,ai_instant_id,token);
         this.refs.fightbtn.setAttribute("disabled", "disabled");
         this.setState({
             isFight:true
         })
+    }
+    handleRenewToken = () =>{
+        const token = getValueFromCookie('tok')
+        const tokencheck = this.props.tokencheck.token_check;
+        if(tokencheck){
+            this.props.relogin(token);
+            const newtoken = this.props.re_login.relogin.token;
+            saveToCookie('tok', newtoken)
+        }
     }
     handleMonsterBag = (monsters) =>{
         return (
