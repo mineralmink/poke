@@ -15,7 +15,7 @@ class Login extends Component {
         this.state = {
             loginFail: false
         }
-        this.handlePushMain = _.debounce(this.handlePushMain, 200);
+        this.handlePushMain = _.debounce(this.handlePushMain, 500);
     }
     componentWillReceiveProps(nextProps){
             if(nextProps.loginResponse.loginFail){
@@ -114,7 +114,7 @@ class Login extends Component {
                                                 !_.isNull((this.props.loginResponse.errorMessage)) && this.state.loginFail &&
                                                 <p className="text-warning">
                                                     {
-                                                        this.props.loginResponse.errorMessage
+                                                        //this.props.loginResponse.errorMessage
                                                     }
                                                 </p>
 

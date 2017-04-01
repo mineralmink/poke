@@ -14,7 +14,8 @@ import {
 
 const AccessingArgumentsExampleGoogleMap = withGoogleMap(props => (
     <GoogleMap
-        defaultZoom={4}
+        ref={props.onMapLoad}
+        defaultZoom={14}
         defaultCenter={props.center}
         onClick={props.onMapClick}
     >
@@ -37,32 +38,36 @@ class AccessingArgumentsExample extends Component {
         this.handleNewCookie = _.debounce(this.handleNewCookie,100);
     }
 
-    // componentWillReceiveProps(nextProps){
-    //     if(nextProps !== this.props){
-    //         // console.log('props',this.props,nextProps)
-    //         // console.log('lat',nextProps.latitude)
-    //         // console.log('f',nextProps.latitude)
-    //         const newLatLng = new google.maps.LatLng(nextProps.latitude,nextProps.longitude);
-    //         this.setState({
-    //             center: newLatLng,
-    //             markers: [
-    //                 ...this.state.markers,
-    //                 {position: newLatLng},
-    //             ],
-    //         });
-    //     }
-    // }
+    clearMarker = ()=>{
+        for (let i = 0; i < this.state.markers.length-1; i++) {
+            this.state.markers[i].setMap(null);
+        }
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps !== this.props){
+            // console.log('props',this.props,nextProps)
+             console.log('lat',nextProps.latitude)
+            // console.log('f',nextProps.latitude)
+            const newLatLng = new google.maps.LatLng(nextProps.latitude,nextProps.longitude);
+            this.setState({
+                center: newLatLng,
+                markers: [
+                    ...this.state.markers,
+                    {position: newLatLng},
+                ],
+            });
+        }
+    }
     state = {
-        markers: [ ],
+        markers: [
+            {position:new google.maps.LatLng(13.730046, 100.778366) }
+        ],
         center: new google.maps.LatLng(13.730046, 100.778366),
     };
 
     handleMapClick = this.handleMapClick.bind(this);
-    // handleAgain=()=>{
-    //     const token = getValueFromCookie('tok')
-    //     this.props.isTokenExired(token);
-    //     this.handleRenewToken();
-    // }
+
     handleMapClick(event) {
          console.log(this.state.center.lat())
          console.log(this.state.center.lng())
@@ -80,6 +85,7 @@ class AccessingArgumentsExample extends Component {
                 { position: event.latLng },
             ],
         });
+
     }
 
 
@@ -94,8 +100,8 @@ class AccessingArgumentsExample extends Component {
     }
     render() {
         //console.log(this.props);
-        //console.log('state',this.state.center.lat());
-
+        console.log('state',this.state.center.lat());
+        console.log('rerender')
         return (
             <AccessingArgumentsExampleGoogleMap
                 containerElement={
